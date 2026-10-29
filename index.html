@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faf7">
+  <title>Jaydeep & Aruni · A little love is on the way</title>
+  <meta name="description" content="Join Jaydeep & Aruni for a baby shower at Magnolia Hall, Hamilton. Sunday, November 29, 2026, from 10 AM onwards. A little celebration, a whole lot of love.">
+  <meta property="og:title" content="A little love is on the way · Jaydeep & Aruni">
+  <meta property="og:description" content="You’re invited! November 29, 2026 · 10 AM onwards · Magnolia Hall, Hamilton.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="img/invitation/heart.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/invitation.css">
+  <link rel="preload" href="img/invitation/teddy.webp" as="image">
+  <script src="js/site-config.js" defer></script>
+  <script src="js/invitation-core.js" defer></script>
+  <script src="js/invitation.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the invitation</a>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div>
+  <header class="site-header">
+    <a class="brand" href="#welcome" aria-label="Jaydeep and Aruni, back to the beginning">J<span>♡</span>A</a>
+    <nav aria-label="Invitation navigation">
+      <a href="#celebrate">Our day</a><a href="#venue">Find us</a>
+      <a class="nav-rsvp" href="#rsvp">RSVP <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <div class="teddy-stage" id="teddy-stage" aria-hidden="true"><div class="floating-teddy" id="floating-teddy"><img src="img/invitation/teddy.webp" width="1024" height="1536" alt="" fetchpriority="high"></div></div>
+  <main id="main">
+    <section class="hero" id="welcome" aria-labelledby="hero-title">
+      <img class="floral hero-floral-top" src="img/invitation/florals.webp" width="1297" height="1212" alt="" aria-hidden="true">
+      <div class="hero-layout content-width">
+        <div class="hero-copy">
+          <p class="eyebrow hero-enter">A little celebration. A whole lot of love.</p>
+          <h1 class="hero-enter" id="hero-title">A little love<br>is on the <em>way.</em></h1>
+          <div class="botanical-divider hero-enter" aria-hidden="true">❧ <span>♡</span> ❧</div>
+          <p class="hero-hosts hero-enter" data-parents>Jaydeep <span>&</span> Aruni</p>
+          <p class="hero-description hero-enter">With full hearts and a little one on the way,<br>we’d love to celebrate with you.</p>
+          <a class="button hero-enter" href="#rsvp">Come celebrate with us <span aria-hidden="true">↗</span></a>
+          <p class="hero-date hero-enter">November 29, 2026 <span aria-hidden="true">·</span> Hamilton, ON</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="watercolor-orbit"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+          <span class="little-spark spark-one">✧</span><span class="little-spark spark-two">✧</span>
+          <img class="couple-portrait" id="couple-portrait" alt="" hidden>
+          <img class="floral hero-floral-bottom" src="img/invitation/florals.webp" width="1297" height="1212" alt="">
+          <span class="art-caption">the sweetest adventure is about to begin</span>
+        </div>
+      </div>
+      <a class="scroll-invitation" href="#little-surprise"><span>There’s a little more to discover</span><span class="scroll-line" aria-hidden="true"></span></a>
+    </section>
+    <section class="surprise section-pad" id="little-surprise" aria-labelledby="surprise-title">
+      <div class="narrow-content reveal-on-scroll">
+        <p class="eyebrow">01 / A little something to discover</p>
+        <h2 id="surprise-title">Our next chapter<br>has a <em>date.</em></h2>
+        <p class="section-intro">A tiny new person. So much love already.<br>We’ve tucked a little surprise away for you.</p>
+        <div class="scratch-card" id="scratch-card">
+          <span class="scratch-corner" aria-hidden="true">❧</span>
+          <div class="scratch-area" id="scratch-area">
+            <div class="due-date-content" id="due-date-content"><p class="eyebrow">Our little one is expected</p><p class="due-date" id="due-date">February 2027</p><span class="date-heart" aria-hidden="true">♡</span></div>
+            <canvas id="scratch-canvas" aria-hidden="true" hidden></canvas>
+          </div>
+          <button class="text-button scratch-button" id="reveal-date" type="button" hidden>Or tap here to reveal <span aria-hidden="true">↗</span></button>
+          <p class="scratch-after" id="scratch-after" hidden>We can hardly wait to meet you, little one.</p>
+        </div><p id="reveal-announcement" class="sr-only" role="status"></p>
+      </div>
+    </section>
+    <section class="celebration section-pad" id="celebrate" aria-labelledby="celebration-title">
+      <img class="floral event-floral" src="img/invitation/florals.webp" width="1297" height="1212" alt="" aria-hidden="true" loading="lazy">
+      <div class="narrow-content reveal-on-scroll">
+        <p class="eyebrow">02 / Together is the loveliest place to be</p>
+        <h2 id="celebration-title">A day full of <em>love.</em></h2>
+        <p class="section-intro">Please join us for our baby shower.<br>Good company, happy hearts, and a little surprise.</p>
+        <div class="event-date-block">
+          <div class="calendar-date" aria-hidden="true"><span>NOV</span><strong>29</strong><span>2026</span></div>
+          <div class="event-date-copy"><p>Sunday, November 29, 2026</p><strong>10:00 AM onwards</strong><span>Magnolia Hall · Hamilton, Ontario</span></div>
+        </div>
+        <p class="countdown-caption" id="countdown-caption">Counting the little moments until we celebrate</p>
+        <div class="countdown" id="countdown" role="timer" aria-label="Time until the baby shower" aria-live="off">
+          <div><span id="countdown-days">—</span><small>Days</small></div><span class="countdown-colon" aria-hidden="true">:</span>
+          <div><span id="countdown-hours">—</span><small>Hours</small></div><span class="countdown-colon" aria-hidden="true">:</span>
+          <div><span id="countdown-minutes">—</span><small>Minutes</small></div><span class="countdown-colon" aria-hidden="true">:</span>
+          <div><span id="countdown-seconds">—</span><small>Seconds</small></div>
+        </div>
+        <button class="text-button calendar-button" type="button" id="add-to-calendar" hidden><span aria-hidden="true">＋</span> Add a little joy to your calendar</button>
+        <div class="reveal-note"><span class="reveal-note-star" aria-hidden="true">✧</span><div><p class="eyebrow">Psst… there’s one more surprise</p><h3>One little secret,<br>one big surprise!</h3><p>We’ll reveal baby’s gender at the shower.</p></div><span class="reveal-note-star" aria-hidden="true">✧</span></div>
+        <div class="gift-note"><span aria-hidden="true">♡</span><p>If you’d like to bring a little something, we’d appreciate a gift card or contribution towards our baby’s needs in place of physical gifts.</p></div>
+      </div>
+    </section>
+    <section class="venue section-pad" id="venue" aria-labelledby="venue-title">
+      <div class="venue-layout content-width reveal-on-scroll">
+        <div class="venue-copy">
+          <p class="eyebrow">03 / We’ll see you here</p><h2 id="venue-title">Find your way<br>to our <em>little day.</em></h2>
+          <div class="venue-address"><h3>Magnolia Hall</h3><p>Hamilton, Ontario</p></div><p>We can’t wait to welcome you.</p>
+          <div class="parking-note"><span class="parking-icon" aria-hidden="true">P</span><p><strong>A little note on parking</strong>Please park at City Hall Parking, marked “Park here” on the map.</p></div>
+          <a class="button" id="maps-link" href="https://maps.app.goo.gl/ggcyZocf3u9xvAgi6" target="_blank" rel="noopener noreferrer">Open Google Maps <span aria-hidden="true">↗</span><span class="sr-only"> for Magnolia Hall (opens a new tab)</span></a>
+        </div>
+        <figure class="venue-map">
+          <button type="button" class="map-open" id="open-map" aria-haspopup="dialog" aria-label="Enlarge illustrated map showing Magnolia Hall and City Hall Parking"><img src="img/magnolia-hall-parking-map-v1.webp" width="1514" height="1039" loading="lazy" alt="Illustrated map: Magnolia Hall is below Hunter Street West, left of the central intersection. City Hall Parking is above Hunter Street West to the right, marked Park here."><span class="map-expand"><span aria-hidden="true">⤢</span> A closer look</span></button>
+          <figcaption>A little map to help you find us. Follow Google Maps for directions.</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="rsvp section-pad" id="rsvp" aria-labelledby="rsvp-title">
+      <img class="floral rsvp-floral" src="img/invitation/florals.webp" width="1297" height="1212" alt="" aria-hidden="true" loading="lazy">
+      <div class="form-content reveal-on-scroll">
+        <p class="eyebrow">04 / The day is sweeter with you</p><h2 id="rsvp-title">We’d love to<br>have you <em>with us.</em></h2><div class="botanical-divider" aria-hidden="true">❧ <span>♡</span> ❧</div>
+        <p class="section-intro">Your presence would mean so much to us.<br>Please let us know how many of you will be joining us.</p><p class="rsvp-deadline">Kindly RSVP by <strong>November 15, 2026</strong></p>
+        <p class="form-availability" id="form-availability" role="status">Our RSVP form will be ready soon. Please check back before November 15.</p>
+        <a id="google-form-link" class="button" href="#rsvp" hidden target="_blank" rel="noopener noreferrer">Let us know you’re coming <span aria-hidden="true">↗</span></a>
+        <form class="rsvp-form" id="rsvp-form" method="post" novalidate>
+          <div class="field"><label for="guest-name">Your name</label><input id="guest-name" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Your name or family name" required aria-describedby="name-error"><p class="field-error" id="name-error"></p></div>
+          <div class="field"><label for="guest-email">Email address</label><input id="guest-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required aria-describedby="email-error"><p class="field-error" id="email-error"></p></div>
+          <div class="people-fields">
+            <div class="field"><label for="adults">Adults</label><div class="stepper"><button type="button" data-step="-1" data-for="adults" aria-label="One fewer adult">−</button><input type="number" id="adults" name="adults" value="1" min="1" max="20" step="1" inputmode="numeric" required aria-describedby="adults-hint adults-error"><button type="button" data-step="1" data-for="adults" aria-label="One more adult">＋</button></div><span class="field-hint" id="adults-hint">Including you</span><p class="field-error" id="adults-error"></p></div>
+            <div class="field"><label for="children">Children</label><div class="stepper"><button type="button" data-step="-1" data-for="children" aria-label="One fewer child">−</button><input type="number" id="children" name="children" value="0" min="0" max="20" step="1" inputmode="numeric" required aria-describedby="children-error"><button type="button" data-step="1" data-for="children" aria-label="One more child">＋</button></div><p class="field-error" id="children-error"></p></div>
+          </div>
+          <div class="honeypot" aria-hidden="true"><label for="company">Leave this field empty</label><input name="company" id="company" type="text" tabindex="-1" autocomplete="off"></div>
+          <button class="button submit-button" id="submit-rsvp" type="submit" disabled><span>Send RSVP</span><span aria-hidden="true">↗</span></button><p id="form-status" class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+        </form>
+        <div class="rsvp-success" id="rsvp-success" hidden tabindex="-1"><span aria-hidden="true">♡</span><h3>So lovely. See you there!</h3><p>Thank you for letting us know.<br>We’re looking forward to celebrating with you!</p><p id="rsvp-receipt"></p></div>
+        <noscript><p>Please enable JavaScript to send your RSVP. The event details and venue link are available above.</p></noscript>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><span class="footer-heart" aria-hidden="true">♡</span><p>A little love. A lifetime of memories.</p><p class="footer-names">With love, <span data-parents>Jaydeep & Aruni</span></p><a href="#welcome">Back to the beginning <span aria-hidden="true">↑</span></a></footer>
+  <dialog class="map-dialog" id="map-dialog" aria-labelledby="map-dialog-title">
+    <div class="map-dialog-header"><h2 id="map-dialog-title">Find us at Magnolia Hall</h2><button class="icon-button" type="button" id="close-map" aria-label="Close map">×</button></div>
+    <p class="map-dialog-caption">“Park here” marks City Hall Parking. Use the controls to take a closer look.</p>
+    <div class="map-dialog-scroll" id="map-dialog-scroll"><img id="large-map" src="img/magnolia-hall-parking-map-v1.webp" width="1514" height="1039" loading="lazy" alt="Magnolia Hall and City Hall Parking, marked Park here, on Hunter Street West."></div>
+    <div class="map-dialog-footer"><div class="map-zoom-controls"><button type="button" class="icon-button" id="map-zoom-out" aria-label="Zoom out">−</button><output id="map-zoom-label" aria-live="polite">100%</output><button type="button" class="icon-button" id="map-zoom-in" aria-label="Zoom in">＋</button></div><a href="https://maps.app.goo.gl/ggcyZocf3u9xvAgi6" target="_blank" rel="noopener noreferrer">Open Google Maps ↗</a></div>
+  </dialog>
+</body>
+</html>
