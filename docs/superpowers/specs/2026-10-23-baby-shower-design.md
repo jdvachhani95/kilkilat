@@ -4,11 +4,15 @@ Visual concept: [scrolling invitation](assets/baby-shower-scroll-concept.png). T
 
 The [updated RSVP concept](assets/baby-shower-rsvp-concept-v2.png), dated October 27, 2026, supersedes the RSVP section of the original scrolling concept.
 
+## Copy and story update — October 29, 2026
+
+This update supersedes the earlier headline, gift wording, and callout order below. Open with **“We’re having a baby!”**, followed by the scratch-card message **“See you in February!”**, then **“Baby shower. Big reveal!”**. Combine the gender-reveal message with the celebration introduction: “A baby to celebrate. A gender reveal to cheer for! We’d love to share the surprise with you!” Do not add a separate gender-reveal callout. Use a playful, casual tone, with only one visible use of “little”. The gift note now reads **“No boxed gifts, please ♡ Gift cards or contributions towards baby’s needs are welcome.”** Parking instructions name **City Hall Parking**, explain the **“Park here”** marker, and distinguish it from Magnolia Hall. Keep the existing light sage palette, scrolling teddy, map, and RSVP functionality.
+
 ## Purpose and audience
 
 A personal, interactive invitation for approximately 35–40 families. Guests should enjoy discovering the invitation, find the practical information quickly, and RSVP with their name, email address, number of adults and number of children. The artwork should remain meaningful as a family keepsake after the event.
 
-The hosts are **Jaydeep & Aruni**. The expected due date for the online reveal is **February 2027**. RSVPs are requested by **November 15, 2026**, inclusive of that day in Hamilton's timezone.
+The hosts are **Aruni & Jaydeep**. The online arrival reveal says **“See you in February!”**. Do not show a due day or year. RSVPs are requested by **November 15, 2026**, inclusive of that day in Hamilton's timezone.
 
 ## Agreed visual direction
 
@@ -26,14 +30,14 @@ The hosts are **Jaydeep & Aruni**. The expected due date for the online reveal i
 - Calendar date: `2026-11-29`; the weekday has been checked against the calendar.
 - Display time: **10:00 AM onwards**. No end time is specified.
 - Use Hamilton's local timezone, **America/Toronto**. The countdown targets **November 29, 2026 at 10:00 AM EST**, represented as `2026-11-29T10:00:00-05:00`, independently of the visitor's timezone.
-- Include a playful callout alongside the event details, below the countdown and before the gift note: **“One little secret, one big surprise! We’ll reveal baby’s gender at the shower.”**
-- The gender reveal happens in person on the event day. Keep the invitation's palette gender-neutral, and keep the online scratch card specifically about the expected due date. Do not reveal gender through the website or add a guessing game without a further request.
+- Include the gender reveal in the celebration introduction: **“A baby to celebrate. A gender reveal to cheer for! We’d love to share the surprise with you!”** No separate callout is needed.
+- The gender reveal happens in person on the event day. Keep the invitation's palette gender-neutral, and keep the online scratch card specifically about the arrival month. Do not reveal gender through the website or add a guessing game without a further request.
 
 ## Continuous scrolling experience
 
 1. **Opening invitation.** Begin with a light, almost empty watercolor canvas. The teddy floats into view and the invitation text and couple illustration appear. The introduction should be brief and scrollable immediately. An RSVP shortcut remains easy to reach.
-2. **Due-date surprise.** An optional scratch card reveals the baby's expected due date. Touch, mouse, keyboard and a visible tap-to-reveal button reach the same result. The card must not block access to event information or RSVP. Treat this as playful discovery; the date is accessible to visitors, rather than confidential or protected by the scratch layer.
-3. **Event details and countdown.** Clearly display **Sunday, November 29, 2026 · 10:00 AM onwards**, in Hamilton's local time, and relevant attendance details. The countdown targets the baby shower, independently of the expected due date. At the start of the event, replace the countdown with a celebratory message. Beneath the countdown, include the playful on-the-day gender-reveal callout specified above. Beneath the event details and before the venue section, include the hosts’ chosen gift note verbatim: “If you’d like to bring a little something, we’d appreciate a gift card or contribution towards our baby’s needs in place of physical gifts.” This expresses the hosts’ preference for cash or gift cards while keeping gifting optional. Use readable, understated text with the same soft sage styling as the invitation. Do not add registry or payment links without the hosts asking.
+2. **Due-date surprise.** An optional scratch card reveals “See you in February!”, without a due day or year. Touch, mouse, keyboard and a visible tap-to-reveal button reach the same result. The card must not block access to event information or RSVP. Treat this as playful discovery; the month is accessible to visitors, rather than confidential or protected by the scratch layer.
+3. **Event details and countdown.** Clearly display **Sunday, November 29, 2026 · 10:00 AM onwards**, in Hamilton's local time, and relevant attendance details. The countdown targets the baby shower, independently of the arrival month. At the start of the event, replace the countdown with a celebratory message. The celebration introduction includes the on-the-day gender reveal; move directly from that introduction to the event date and countdown. Beneath the event details and before the venue section, include the hosts’ chosen gift note verbatim: “No boxed gifts, please ♡ Gift cards or contributions towards baby’s needs are welcome.” This expresses the hosts’ preference for cash or gift cards while keeping gifting optional. Use readable, understated text with the same soft sage styling as the invitation. Do not add registry or payment links without the hosts asking.
 4. **Venue.** Show an original illustrated map preview derived from the actual venue and nearby streets or landmarks. Also provide the readable venue name and address and an **Open Google Maps** button linked to the hosts’ supplied Magnolia Hall URL: **https://maps.app.goo.gl/ggcyZocf3u9xvAgi6**. The illustration is decorative guidance; the button provides real navigation.
 5. **RSVP.** Use warm, humble invitation wording and collect the guest or family name, email address, adults and children separately. Label the adult count as including the person responding so children are not counted twice. Present a clear confirmation after a successful submission and an actionable message if submission fails. The form should be comfortably usable on a phone.
 
@@ -53,7 +57,7 @@ The **Open Google Maps** button opens **Magnolia Hall**, using the exact host-pr
 
 Replace the original concept's “Save your seat” heading with **“We’d love to have you with us”**.
 
-Supporting copy: “Your presence would mean so much to us. Please let us know how many of you will be joining us.”
+Supporting copy: “Let us know who’s coming along.”
 
 Fields, in reading order:
 
@@ -62,7 +66,7 @@ Fields, in reading order:
 3. **Adults** — required whole-number count, including the respondent; default 1 and minimum 1.
 4. **Children** — separate whole-number count; default 0 and minimum 0.
 
-Use full-width name and email inputs on phones. Adult and child counts can sit beside one another when space permits, with touch-friendly controls and a clear “Including you” hint under Adults. Total attendance is adults plus children; do not show an ambiguous additional total-people question.
+Use a compact RSVP layout, at most 460px wide, with a smaller heading, 13px labels, 46px controls, and 14px field gaps. Name and email share a row above 599px and stack at narrower widths. Keep all four fields. Use full-width name and email inputs on phones. Adult and child counts can sit beside one another when space permits, with touch-friendly controls and a clear “Including you” hint under Adults. Total attendance is adults plus children; do not show an ambiguous additional total-people question.
 
 Submit button: **“Send RSVP”**.
 
@@ -88,7 +92,7 @@ Keep invitation artwork and the family illustration suitable for later reuse as 
 
 ## Content needed before publishing
 
-- Photos of the two parents suitable for creating recognizable illustrated portraits. Their display names, Jaydeep & Aruni, have been supplied.
+- Photos of the two parents suitable for creating recognizable illustrated portraits. Their display names, Aruni & Jaydeep, have been supplied.
 - Magnolia Hall's display address if the hosts want a street address alongside the venue name. The shower date, 10:00 AM onwards start, local timezone, RSVP deadline, venue name and Google Maps link are recorded. Do not invent an end time or street address.
 - The hosts' deployed Apps Script receiver URL and private response Sheet, or their official Google Form URL if choosing that alternative. Source and setup instructions are provided.
 

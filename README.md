@@ -1,12 +1,12 @@
 # A little love is on the way
 
-Jaydeep & Aruni's baby shower invitation. **Sunday, November 29, 2026 · 10 AM onwards · Magnolia Hall, Hamilton.**
+Aruni & Jaydeep's baby shower invitation. **Sunday, November 29, 2026 · 10 AM onwards · Magnolia Hall, Hamilton.**
 
 A responsive, buildless website for GitHub Pages, with watercolor artwork, a teddy that drifts as guests scroll, a scratch-to-reveal due date, a timezone-aware countdown, calendar download, an illustrated parking map and a custom RSVP form.
 
 ## Run locally
 
-Open `index.html` in your browser, or run `npm run dev` and visit `http://localhost:4173`. No dependency installation or Sass compilation is needed for the invitation.
+Open `index.html` in your browser for a disconnected preview. For local RSVPs, copy `.env.example` to `.env`, set `RSVP_ENDPOINT` to your Apps Script `/exec` URL, then run `npm run dev` and visit `http://localhost:4173`. The dev command builds and serves `_site/`; restart it after edits. No dependency installation or Sass compilation is needed for the invitation.
 
 ```sh
 npm test
@@ -18,7 +18,7 @@ Node 22 or newer runs these commands. The build writes only the invitation's pub
 
 ## Connect RSVPs and publish
 
-See [the setup guide](docs/SETUP.md). The Google Apps Script receiver is included in `apps-script/`; it creates a private response Sheet and validates every submission. Add its deployed `/exec` URL in `js/site-config.js` to enable the custom form. An official Google Form URL is also supported as an alternative.
+See [the setup guide](docs/SETUP.md). The Google Apps Script receiver is included in `apps-script/`; it creates a private response Sheet and validates every submission. Store its deployed `/exec` URL in the GitHub Actions repository secret `RSVP_ENDPOINT`, and leave `rsvpEndpoint` empty in `js/site-config.js`. The Pages build inserts the URL into the published configuration. Visitors can still see the endpoint in the deployed site. An official Google Form URL is also supported as an alternative.
 
 No live receiver has been configured yet, so the current page explicitly shows that RSVP collection is not ready. A successful confirmation is shown only after a matching server receipt. The actual couple portrait can be added after the hosts supply photos.
 

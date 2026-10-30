@@ -18,7 +18,10 @@ jobs:
           node-version: '22'
       - run: npm test
       - run: npm run check
-      - run: npm run build
+      - name: Build invitation
+        run: npm run build
+        env:
+          RSVP_ENDPOINT: ${{ secrets.RSVP_ENDPOINT }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

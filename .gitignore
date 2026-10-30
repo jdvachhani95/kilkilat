@@ -34,6 +34,8 @@ typings/
 *.tgz
 .yarn-integrity
 .env
+.env.*
+!.env.example
 .sass-cache/
 *.css.map
 _site/

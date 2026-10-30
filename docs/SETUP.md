@@ -4,13 +4,13 @@ The invitation is a static GitHub Pages site. No Node dependencies, frontend bui
 
 ## Preview and checks
 
-Open `index.html` in a browser, or run `npm run dev` and open `http://localhost:4173`. Node 22 or later runs `npm test`, `npm run check`, and `npm run build`. Python 3 is needed only for the optional local preview command. The build writes an allowlisted set of public files to `_site/`; it excludes original template assets, docs, tests and server source.
+Open `index.html` in a browser for a disconnected preview, or run `npm run dev` and open `http://localhost:4173`. The dev command builds first, loads the local `.env` if present, and serves only `_site/`, so the source environment file is not served. Restart it after changing source files or `.env`. Node 22 or later runs `npm test`, `npm run check`, and `npm run build`. Python 3 is needed only for the optional local preview command. The build writes an allowlisted set of public files to `_site/`; it excludes environment files, original template assets, docs, tests and server source.
 
 ## Host settings
 
-Edit `js/site-config.js`. The confirmed names, event date, due date, deadline and Magnolia Hall link are already entered. All values in this file are public. Never add Google credentials or private API keys.
+Edit `js/site-config.js`. The confirmed names, event date, arrival month, deadline and Magnolia Hall link are already entered. All values in this file are public. Never add Google credentials or private API keys.
 
-The event is November 29, 2026, **10 AM onwards**, Hamilton time. The fixed countdown timestamp is `2026-11-29T10:00:00-05:00`. No end time is invented. The due-date reveal is February 2027; it is deliberately separate from the in-person gender reveal. RSVPs close after November 15, Hamilton time. If the deadline changes, update it in both the site configuration and Apps Script.
+The event is November 29, 2026, **10 AM onwards**, Hamilton time. The fixed countdown timestamp is `2026-11-29T10:00:00-05:00`. No end time is invented. The scratch card says “See you in February!”; no due day or year is stored in the public configuration. The gender reveal takes place in person at the shower. RSVPs close after November 15, Hamilton time. If the deadline changes, update it in both the site configuration and Apps Script.
 
 ## Connect the custom RSVP form to a private Sheet
 
@@ -22,8 +22,19 @@ The form is implemented, but it cannot store live responses until the hosts depl
 4. Run `setup` once and authorize your own script. This creates a new private Sheet with columns for received time, name, email, adults, children, total and request ID. Its URL appears in the execution log. Re-running setup reuses the same Sheet.
 5. Share **that Sheet** only with your co-hosts. Do not publish it or turn on public link sharing.
 6. Select **Deploy → New deployment → Web app**. Set **Execute as: Me** and **Who has access: Anyone**. Guests need anonymous access to submit; the script uses your permissions to write to the private Sheet. Deployment availability can depend on your Google Workspace administrator.
-7. Copy the deployed URL ending in `/exec`, and paste it into `rsvpEndpoint` in `js/site-config.js`.
-8. Reload the invitation. The form becomes available until the RSVP deadline. Make one explicitly authorized test response yourself and confirm that it appears in the private Sheet before sharing the invitation.
+7. Copy the deployed URL ending in `/exec`. In your GitHub repository, open **Settings → Secrets and variables → Actions → New repository secret**. Name it **RSVP_ENDPOINT** and paste the URL as its value. Leave `rsvpEndpoint` empty in `js/site-config.js`.
+8. After the updated workflow is pushed, run the Pages workflow on the branch you intend to deploy, or push to `main` or `master`. Adding or changing a secret alone does not trigger deployment. The build inserts the URL into `_site/js/site-config.js`, leaving the source configuration unchanged. Invalid nonempty URLs fail the build; without a secret, the default custom form stays disabled.
+9. Reload the deployed invitation. The form becomes available until the RSVP deadline. Make one explicitly authorized test response yourself and confirm that it appears in the private Sheet before sharing the invitation.
+
+The repository secret prevents the URL from appearing in committed source. The deployed JavaScript and browser requests still expose it to visitors, because the browser submits directly to Apps Script. Keep the response Sheet restricted; endpoint secrecy is not guest authentication. Never place Google credentials or Sheet contents in this setting.
+
+For local use, put the same deployed `/exec` URL in the root `.env` file:
+
+```dotenv
+RSVP_ENDPOINT=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
+```
+
+The build loads `.env` automatically. Existing shell or GitHub Actions environment values take priority. `.env` and its variants are ignored by Git; `.env.example` contains only an empty template. Run `npm run dev` to build and preview with the configured endpoint. Opening the source `index.html` directly does not load `.env`. Keep the GitHub `RSVP_ENDPOINT` repository secret configured separately for deployment, since `.env` is not pushed.
 
 When editing the Apps Script later, update its deployment to a new version. Merely saving editor changes does not update the deployed version. Keep its existing deployment URL when possible.
 
@@ -52,7 +63,7 @@ The template author's `CNAME` has been removed. Add your own only if you have co
 ## Interaction checks
 
 - Scroll through the page: one teddy moves from the hero toward the outer edge, with a gentle sway. It cannot intercept taps. Reduced-motion mode uses a stationary hero illustration.
-- Scratch the due-date card with touch or a mouse, or use the keyboard-accessible reveal button. Reloading preserves an already revealed card when local storage is available.
+- Scratch the baby-arrival card with touch or a mouse, or use the keyboard-accessible reveal button. Reloading preserves an already revealed card when local storage is available.
 - The countdown uses Hamilton's start time even when the visitor is elsewhere. At the start it becomes a celebratory message.
 - The calendar button downloads an `.ics` with the correct start, venue and maps link. No end time is added.
 - Enlarge the parking map, use the zoom controls, and close with the close button, Escape or the backdrop.

@@ -1,10 +1,10 @@
 {
   "name": "wedding-website",
   "version": "1.0.1",
-  "description": "Jaydeep and Aruni's baby shower invitation, November 29, 2026.",
+  "description": "Aruni and Jaydeep's baby shower invitation, November 29, 2026.",
   "main": "npmfile.js",
   "scripts": {
-    "dev": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "dev": "npm run build && python3 -m http.server 4173 --bind 127.0.0.1 --directory _site",
     "build": "node scripts/build.cjs",
     "test": "node --test tests/invitation.test.cjs",
     "test:browser": "node tests/browser-check.cjs",

@@ -1,6 +1,6 @@
 # Baby shower invitation implementation plan
 
-**Goal:** Implement the approved mobile-first invitation for Jaydeep & Aruni, with one scroll-following teddy, a due-date scratch card, event countdown, venue illustration, and a custom RSVP form connected through Google Apps Script to a private Sheet.
+**Goal:** Implement the approved mobile-first invitation for Aruni & Jaydeep, with one scroll-following teddy, a due-date scratch card, event countdown, venue illustration, and a custom RSVP form connected through Google Apps Script to a private Sheet.
 
 **Architecture:** Buildless HTML, CSS and ordinary JavaScript served from GitHub Pages. Separate host configuration, testable date/validation/motion logic, browser interactions and the Apps Script receiver. No framework, analytics, client credentials or third-party animation library.
 
@@ -10,7 +10,7 @@
 
 - [x] Create meaningful failing Node tests for the event deadline/countdown, count validation, teddy path bounds and Apps Script receipt handling.
 - [x] Implement `js/site-config.js` and `js/invitation-core.js`. Use explicit timezone offsets, a month-only expected arrival, named validation failures, and one safe animation path bounded to decorative space.
-- [x] Generate and save independent transparent teddy and floral artwork under `img/invitation/`. Use supplied venue illustration. Do not present unrelated couple portraits as Jaydeep and Aruni.
+- [x] Generate and save independent transparent teddy and floral artwork under `img/invitation/`. Use supplied venue illustration. Do not present unrelated couple portraits as Aruni and Jaydeep.
 - [x] Replace `index.html` and add `css/invitation.css`: semantic navigation, hero, scratch reveal, event details/countdown, exact gift note, venue/map dialog and RSVP. Support phone and desktop, keyboard, reduced motion and no-JavaScript informational content.
 - [x] Add `js/invitation.js`: requestAnimationFrame-based scroll motion, progress, intersection reveals, touch/mouse scratch and keyboard reveal, date countdown, calendar download, zoomable map, count controls, honest validated form submission and error recovery.
 - [x] Add `apps-script/Code.gs` and `appsscript.json`: validate all fields server-side, respect the RSVP deadline, escape spreadsheet formulas, serialize writes, recognize retried request IDs, reject bot honeypots and avoid exposing response data.

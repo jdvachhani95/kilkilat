@@ -50,7 +50,7 @@ fs.mkdirSync(output, { recursive: true });
   try {
     const mobile = await makeContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
     const page = mobile.page;
-    assert.equal(await page.title(), 'Jaydeep & Aruni · A little love is on the way');
+    assert.equal(await page.title(), 'Aruni & Jaydeep · We’re having a baby!');
     assert.equal(await page.locator('#submit-rsvp').isDisabled(), true);
     assert.equal(await page.locator('#maps-link').getAttribute('href'), 'https://maps.app.goo.gl/ggcyZocf3u9xvAgi6');
     checks += 3;
@@ -71,7 +71,7 @@ fs.mkdirSync(output, { recursive: true });
     await scrollTo(page, '#little-surprise');
     await page.locator('#reveal-date').click();
     assert.equal(await page.locator('#scratch-card').evaluate((el) => el.classList.contains('is-revealed')), true);
-    assert.equal(await page.locator('#due-date').textContent(), 'February 2027');
+    assert.equal(await page.locator('#due-date').textContent(), 'See you in February!');
     await page.reload();
     assert.equal(await page.locator('#scratch-card').evaluate((el) => el.classList.contains('is-revealed')), true);
     checks += 3;

@@ -50,11 +50,6 @@ test('RSVP rejects invalid email, missing name, fractional, negative and excessi
   }
 });
 
-test('month-only reveal displays February 2027 without a day or timezone shift', () => {
-  assert.equal(typeof core.formatMonth, 'function');
-  assert.equal(core.formatMonth('2027-02'), 'February 2027');
-});
-
 test('teddy stays at the phone edge after leaving the hero and has finite poses', () => {
   assert.equal(typeof core.teddyPose, 'function');
   for (const width of [320, 390, 768, 1440]) {

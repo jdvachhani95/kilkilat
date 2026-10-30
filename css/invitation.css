@@ -107,7 +107,7 @@ em {
   z-index:3;
 }
 .section-pad {
-  padding:118px 0;
+  padding:118px 0 0;
   position:relative;
   overflow:clip;
 }
@@ -257,8 +257,7 @@ em {
 }
 .hero {
   position:relative;
-  min-height:850px;
-  min-height:max(850px,100svh);
+  min-height:0;
   overflow:clip;
   background:radial-gradient(ellipse at 78% 47%,#dfeee47d 0%,#f3f8f54d 35%,transparent 70%),radial-gradient(ellipse at 10% 100%,#e6f0e899,transparent 55%);
 }
@@ -266,8 +265,7 @@ em {
   display:grid;
   grid-template-columns:1.1fr .9fr;
   align-items:center;
-  min-height:850px;
-  min-height:max(850px,100svh);
+  min-height:0;
 }
 .hero-copy {
   position:relative;
@@ -277,6 +275,23 @@ em {
 .hero h1 {
   font-size:clamp(68px,7.7vw,105px);
   margin:20px 0 22px;
+}
+.announcement-tag {
+  display:inline-flex;
+  align-items:center;
+  gap:16px;
+  padding:8px 20px;
+  border-radius:100px;
+  background:#e4f0e8;
+  color:#466c54;
+  font:500 14px/1.5 var(--sans);
+  letter-spacing:.025em;
+  text-transform:none;
+  transform:rotate(-3deg);
+}
+.announcement-tag span {
+  color:#7a9b7e;
+  font-size:17px;
 }
 .hero .botanical-divider {
   justify-content:flex-start;
@@ -607,37 +622,6 @@ em {
   margin-top:20px;
   font-size:10px;
 }
-.reveal-note {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:34px;
-  margin-top:66px;
-  padding:35px 15px;
-  border-block:1px solid #d9e4dc;
-}
-.reveal-note .eyebrow {
-  font-size:8px;
-  margin-bottom:13px;
-}
-.reveal-note h3 {
-  font-size:33px;
-  letter-spacing:-.035em;
-}
-.reveal-note p:last-child {
-  color:var(--muted);
-  font-size:13px;
-  margin-top:15px;
-}
-.reveal-note-star {
-  font:40px var(--serif);
-  color:#9ab091;
-  transform:rotate(15deg);
-}
-.reveal-note-star:last-child {
-  font-size:24px;
-  transform:rotate(-12deg);
-}
 .gift-note {
   display:flex;
   align-items:flex-start;
@@ -772,30 +756,35 @@ figcaption {
   opacity:.65;
 }
 .form-content {
-  width:min(570px,calc(100% - 48px));
+  width:min(460px,calc(100% - 48px));
   margin-inline:auto;
   position:relative;
   z-index:3;
   text-align:center;
 }
-.rsvp .botanical-divider {
-  margin-top:25px;
+.rsvp h2 {
+  font-size:clamp(34px,4vw,44px);
+  line-height:1.12;
+}
+.rsvp .eyebrow {
+  margin-bottom:12px;
 }
 .rsvp .section-intro {
   font-size:14px;
+  margin-top:12px;
 }
 .rsvp-deadline {
   font-size:11px;
   color:var(--muted);
-  margin-top:16px;
+  margin-top:8px;
 }
 .rsvp-deadline strong {
   font-weight:500;
   color:var(--ink);
 }
 .form-availability {
-  margin-top:25px;
-  padding:13px 17px;
+  margin-top:18px;
+  padding:10px 14px;
   background:#edf3ee;
   border:1px solid #dce6dd;
   border-radius:10px;
@@ -804,27 +793,30 @@ figcaption {
   color:#526c58;
 }
 .rsvp-form {
-  margin-top:32px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:14px;
+  margin-top:20px;
   text-align:left;
 }
 .field {
-  margin-bottom:19px;
+  margin-bottom:0;
   min-width:0;
 }
 .field label {
   display:block;
-  font:21px/1.5 var(--serif);
-  margin-bottom:8px;
+  font:500 13px/1.5 var(--sans);
+  margin-bottom:5px;
 }
 .field>input {
   width:100%;
-  height:54px;
-  padding:12px 17px;
+  height:46px;
+  padding:10px 12px;
   border:1px solid #cbd7cf;
   background:#ffffffd9;
   border-radius:10px;
   color:var(--ink);
-  font-size:14px;
+  font-size:16px;
   transition:border .2s,box-shadow .2s;
 }
 .field>input::placeholder {
@@ -848,14 +840,15 @@ figcaption {
   display:none;
 }
 .people-fields {
+  grid-column:1 / -1;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:23px;
+  gap:14px;
 }
 .stepper {
   display:grid;
-  grid-template-columns:48px minmax(0,1fr) 48px;
-  height:54px;
+  grid-template-columns:44px minmax(0,1fr) 44px;
+  height:46px;
   border:1px solid #cbd7cf;
   border-radius:10px;
   overflow:hidden;
@@ -905,8 +898,10 @@ figcaption {
   margin-top:6px;
 }
 .submit-button {
+  grid-column:1 / -1;
   width:100%;
-  margin-top:9px;
+  min-height:46px;
+  margin-top:0;
   justify-content:space-between;
   font-size:14px;
   padding-inline:25px;
@@ -922,14 +917,15 @@ figcaption {
   opacity:.75;
 }
 .form-status {
+  grid-column:1 / -1;
   font-size:12px;
-  margin-top:14px;
+  margin-top:0;
   color:#a13c34;
   line-height:1.7;
   text-align:center;
 }
 .form-status:empty {
-  margin:0;
+  display:none;
 }
 .rsvp-success {
   padding:34px 22px;
@@ -961,7 +957,7 @@ figcaption {
   position:relative;
   z-index:3;
   text-align:center;
-  padding:45px 24px 40px;
+  padding:45px 24px 20px;
   border-top:1px solid #e4ece5;
   background:#f6faf7;
   font-size:12px;
@@ -1178,7 +1174,7 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     font-size:43px;
   }
   .section-pad {
-    padding:95px 0;
+    padding:95px 0 0;
   }
   .venue .button {
     gap:16px;
@@ -1240,8 +1236,8 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     margin:5px auto 0;
   }
   .hero {
-    min-height:980px;
-    padding-bottom:75px;
+    min-height:0;
+    padding-bottom:60px;
   }
   .hero-floral-top {
     width:220px;
@@ -1287,7 +1283,7 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     font-size:9px;
   }
   .section-pad {
-    padding:85px 0;
+    padding:85px 0 0;
   }
   .eyebrow {
     font-size:8px;
@@ -1350,7 +1346,7 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     font-size:13px;
   }
   .form-content {
-    width:min(540px,calc(100% - 48px));
+    width:min(460px,calc(100% - 48px));
   }
   .event-floral {
     width:230px;
@@ -1386,7 +1382,7 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
 }
 @media(max-width:599px) {
   .hero {
-    min-height:960px;
+    min-height:0;
   }
   .hero-copy {
     padding-top:117px;
@@ -1444,27 +1440,6 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     font-size:22px;
     line-height:1.9;
   }
-  .reveal-note {
-    gap:13px;
-    padding:30px 5px;
-    margin-top:52px;
-  }
-  .reveal-note h3 {
-    font-size:30px;
-  }
-  .reveal-note p:last-child {
-    font-size:12px;
-  }
-  .reveal-note .eyebrow {
-    font-size:7px;
-    letter-spacing:.12em;
-  }
-  .reveal-note-star {
-    font-size:28px;
-  }
-  .reveal-note-star:last-child {
-    font-size:18px;
-  }
   .event-date-copy p {
     font-size:16px;
   }
@@ -1486,11 +1461,8 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
   .calendar-button {
     font-size:9px;
   }
-  .people-fields {
-    gap:15px;
-  }
-  .field label {
-    font-size:20px;
+  .rsvp-form {
+    grid-template-columns:minmax(0,1fr);
   }
   .stepper {
     grid-template-columns:44px minmax(0,1fr) 44px;
@@ -1505,13 +1477,10 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     font-size:12px;
   }
   .section-pad {
-    padding:78px 0;
+    padding:78px 0 0;
   }
   .narrow-content {
     width:calc(100% - 48px);
-  }
-  .rsvp .botanical-divider {
-    margin-top:21px;
   }
   .rsvp .section-intro br {
     display:none;
@@ -1636,7 +1605,7 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     height:300px;
   }
   .section-pad {
-    padding-block:45px;
+    padding:45px 0 0;
     break-inside:avoid;
   }
   .js .reveal-on-scroll {

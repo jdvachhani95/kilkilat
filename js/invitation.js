@@ -7,7 +7,7 @@
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   document.querySelectorAll('[data-parents]').forEach((el) => { el.textContent = config.parents; });
-  byId('due-date').textContent = core.formatMonth(config.dueMonth);
+  byId('due-date').textContent = 'See you in ' + config.arrivalMonth + '!';
   if (config.portraitImage) {
     const portrait = byId('couple-portrait');
     portrait.src = config.portraitImage;
@@ -90,17 +90,17 @@
     byId('add-to-calendar').addEventListener('click', () => {
       const escape = (text) => text.replace(/\\/g, '\\\\').replace(/\r?\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
       const stamp = (date) => date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-      const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Jaydeep and Aruni//Baby Shower//EN',
+      const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Aruni and Jaydeep//Baby Shower//EN',
         'BEGIN:VEVENT', 'UID:jaydeep-aruni-baby-shower-20261129@invitation.local',
         'DTSTAMP:' + stamp(new Date()), 'DTSTART:' + stamp(new Date(config.eventStart)),
-        'SUMMARY:' + escape(config.parents + ' — Baby shower'),
+        'SUMMARY:' + escape(config.parents + ' — Baby shower & gender reveal'),
         'LOCATION:Magnolia Hall\\, Hamilton\\, Ontario',
-        'DESCRIPTION:' + escape('10 AM onwards. Please park at City Hall Parking. Directions: ' + config.mapsUrl),
+        'DESCRIPTION:' + escape('Baby shower and gender reveal, 10 AM onwards. Please park at City Hall Parking. Directions to Magnolia Hall: ' + config.mapsUrl),
         'URL:' + config.mapsUrl, 'END:VEVENT', 'END:VCALENDAR'];
       const url = URL.createObjectURL(new Blob([lines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' }));
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'Jaydeep-and-Aruni-baby-shower.ics';
+      link.download = 'Aruni-and-Jaydeep-baby-shower.ics';
       document.body.append(link);
       link.click();
       link.remove();
@@ -114,7 +114,7 @@
     const area = byId('scratch-area');
     const content = byId('due-date-content');
     const button = byId('reveal-date');
-    const storageKey = 'ja:due-date-revealed:' + config.dueMonth;
+    const storageKey = 'ja:arrival-revealed:' + config.arrivalMonth;
     let revealed = false;
     let activePointer = null;
     let last = null;
@@ -127,7 +127,7 @@
       const hadFocus = document.activeElement === button;
       button.hidden = true;
       byId('scratch-after').hidden = false;
-      if (announce) byId('reveal-announcement').textContent = 'Our little one is expected in ' + core.formatMonth(config.dueMonth) + '.';
+      if (announce) byId('reveal-announcement').textContent = 'Baby is arriving in ' + config.arrivalMonth + '!';
       if (hadFocus) { content.tabIndex = -1; content.focus({ preventScroll: true }); }
       try { localStorage.setItem(storageKey, 'yes'); } catch (_) { /* The reveal works without storage. */ }
       setTimeout(() => { canvas.hidden = true; }, motion.matches ? 0 : 700);
@@ -159,7 +159,7 @@
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#506e56';
       ctx.font = '24px Georgia'; ctx.fillText('♡', width / 2, height / 2 - 32);
       ctx.font = `italic ${width < 320 ? 18 : 23}px Georgia`;
-      ctx.fillText('A little surprise awaits', width / 2, height / 2 + 1);
+      ctx.fillText('A hello from baby awaits', width / 2, height / 2 + 1);
       ctx.font = '10px -apple-system, sans-serif'; ctx.fillStyle = '#617b65';
       ctx.fillText('SCRATCH GENTLY TO DISCOVER', width / 2, height / 2 + 30);
       canvas.hidden = false;
@@ -320,9 +320,9 @@
           const messages = {
             validation: 'Please check the details below and try again.',
             closed: 'Our RSVP date has passed. Thank you for all the love!',
-            busy: 'Our guest list is a little busy. Please try again in a moment.',
-            rate_limit: 'We’ve received a few responses from this email. Please wait a little and try again.',
-            unavailable: 'We couldn’t save your RSVP just now. Please try again in a little while.'
+            busy: 'Our guest list is busy just now. Please try again in a moment.',
+            rate_limit: 'We’ve received a few responses from this email. Please wait a moment and try again.',
+            unavailable: 'We couldn’t save your RSVP just now. Please try again in a moment.'
           };
           if (result.code === 'validation') showErrors(result.errors || {});
           if (result.code === 'closed') serverClosed = true;

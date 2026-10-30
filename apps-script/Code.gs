@@ -7,7 +7,7 @@ function setup() {
   var properties = PropertiesService.getScriptProperties();
   var id = properties.getProperty('RSVP_SHEET_ID');
   if (id) { console.log(SpreadsheetApp.openById(id).getUrl()); return; }
-  var spreadsheet = SpreadsheetApp.create('Jaydeep & Aruni — Baby shower RSVPs');
+  var spreadsheet = SpreadsheetApp.create('Aruni & Jaydeep — Baby shower RSVPs');
   var sheet = spreadsheet.getSheets()[0];
   sheet.setName('RSVPs');
   sheet.appendRow(['Received at', 'Name', 'Email', 'Adults', 'Children', 'Total', 'Request ID']);

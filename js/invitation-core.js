@@ -20,12 +20,6 @@
     return now <= Date.parse(deadline);
   }
 
-  function formatMonth(month) {
-    return new Intl.DateTimeFormat('en-US', {
-      month: 'long', year: 'numeric', timeZone: 'UTC'
-    }).format(new Date(month + '-01T12:00:00Z'));
-  }
-
   function validateRsvp(input) {
     const name = typeof input.name === 'string' ? input.name.trim().replace(/\s+/g, ' ') : '';
     const email = typeof input.email === 'string' ? input.email.trim().toLowerCase() : '';
@@ -70,5 +64,5 @@
     };
   }
 
-  return { countdown, rsvpIsOpen, formatMonth, validateRsvp, canSubmitRsvp, teddyPose };
+  return { countdown, rsvpIsOpen, validateRsvp, canSubmitRsvp, teddyPose };
 }));
