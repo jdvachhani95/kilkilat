@@ -13,7 +13,9 @@ if (endpoint && !/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test
 const files = [
   'index.html', '.nojekyll', 'css/invitation.css', 'js/site-config.js',
   'js/invitation-core.js', 'js/invitation.js', 'img/invitation/heart.svg',
-  'img/invitation/teddy.webp', 'img/invitation/florals.webp', 'img/magnolia-hall-parking-map-v1.webp'
+  'img/invitation/teddy.webp', 'img/invitation/florals.webp', 'img/magnolia-hall-parking-map-v1.webp',
+  'img/invitation/memories/couple-6929.webp', 'img/invitation/memories/aruni-heart.webp',
+  'img/invitation/memories/newspaper-6845.webp'
 ];
 fs.rmSync(output, { recursive: true, force: true });
 for (const file of files) {

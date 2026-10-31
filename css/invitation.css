@@ -270,7 +270,7 @@ em {
 .hero-copy {
   position:relative;
   z-index:4;
-  padding:135px 0 105px;
+  padding:135px 0 40px;
 }
 .hero h1 {
   font-size:clamp(68px,7.7vw,105px);
@@ -322,9 +322,14 @@ em {
 }
 .hero-art {
   position:relative;
-  height:620px;
-  z-index:1;
+  padding-top:85px;
+  z-index:3;
   pointer-events:none;
+}
+.hero-scene {
+  position:relative;
+  height:560px;
+  overflow:hidden;
 }
 .watercolor-orbit {
   position:absolute;
@@ -384,29 +389,24 @@ em {
   font-size:25px;
 }
 .art-caption {
-  position:absolute;
-  bottom:85px;
-  left:5px;
-  right:0;
+  position:relative;
+  margin:18px 12px 0;
   text-align:center;
   color:#718571;
-  font:italic 18px var(--serif);
-  transform:rotate(-5deg);
+  font:italic 18px/1.6 var(--serif);
 }
 .couple-portrait {
-  position:absolute;
-  width:280px;
-  max-height:300px;
+  position:relative;
+  display:block;
+  width:100%;
+  height:100%;
   object-fit:contain;
-  bottom:40px;
-  left:0;
   z-index:2;
 }
 .scroll-invitation {
-  position:absolute;
-  bottom:23px;
-  left:50%;
-  transform:translateX(-50%);
+  position:relative;
+  width:fit-content;
+  margin:18px auto 24px;
   z-index:4;
   display:flex;
   flex-direction:column;
@@ -428,7 +428,7 @@ em {
   position:fixed;
   inset:0;
   z-index:2;
-  overflow:clip;
+  overflow:hidden;
   pointer-events:none;
 }
 .motion-reduced .teddy-stage {
@@ -445,7 +445,7 @@ em {
   user-select:none;
   will-change:transform;
   transform:translate(75vw,180px);
-  transition:opacity .6s;
+  transition:opacity .25s ease;
 }
 .floating-teddy img {
   display:block;
@@ -453,9 +453,6 @@ em {
   animation:teddy-bob 5s ease-in-out infinite;
   transform-origin:50% 15%;
   filter:drop-shadow(0 10px 18px #7590780c);
-}
-.floating-teddy.is-traveling {
-  opacity:.7;
 }
 .motion-reduced .floating-teddy {
   position:absolute;
@@ -466,6 +463,34 @@ em {
 }
 .surprise {
   background:linear-gradient(180deg,#fafcfb00,#f5f9f6 45%,#fafcfb00);
+}
+.arrival-layout,.celebration-layout {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:64px;
+  align-items:center;
+}
+.arrival-layout>.narrow-content,.celebration-layout>.narrow-content {
+  width:100%;
+}
+.memory-portrait {
+  position:relative;
+  z-index:3;
+  width:100%;
+  margin:auto;
+  pointer-events:none;
+}
+.memory-portrait img {
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+.arrival-portrait {
+  max-width:340px;
+}
+.newspaper-portrait {
+  max-width:350px;
 }
 .scratch-card {
   position:relative;
@@ -1086,10 +1111,10 @@ figcaption {
 .hero-enter:nth-child(7) {
   animation-delay:.55s;
 }
-html:not(.js) .floating-teddy {
+html:not(.teddy-ready) .floating-teddy {
   position:absolute;
 }
-html:not(.js) .teddy-stage {
+html:not(.teddy-ready) .teddy-stage {
   position:absolute;
   bottom:auto;
   height:1000px;
@@ -1136,8 +1161,8 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
   }
 }
 @media(min-width:1600px) {
-  .hero-art {
-    height:660px;
+  .hero-scene {
+    height:620px;
   }
   .hero-floral-top {
     width:370px;
@@ -1153,8 +1178,11 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
   .hero h1 {
     font-size:76px;
   }
-  .hero-art {
-    height:560px;
+  .hero-scene {
+    height:510px;
+  }
+  .arrival-layout,.celebration-layout {
+    gap:32px;
   }
   .hero-hosts {
     font-size:29px;
@@ -1230,14 +1258,17 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     margin-top:18px;
   }
   .hero-art {
-    height:340px;
+    padding-top:0;
     width:100%;
     max-width:450px;
     margin:5px auto 0;
   }
+  .hero-scene {
+    height:420px;
+  }
   .hero {
     min-height:0;
-    padding-bottom:60px;
+    padding-bottom:0;
   }
   .hero-floral-top {
     width:220px;
@@ -1265,9 +1296,7 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     right:15px;
   }
   .art-caption {
-    bottom:37px;
     font-size:15px;
-    left:0;
   }
   .spark-one {
     top:25px;
@@ -1279,8 +1308,20 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     right:35px;
   }
   .scroll-invitation {
-    bottom:16px;
     font-size:9px;
+  }
+  .arrival-layout,.celebration-layout {
+    grid-template-columns:minmax(0,1fr);
+    gap:24px;
+  }
+  .memory-portrait img {
+    height:340px;
+  }
+  .newspaper-portrait {
+    order:-1;
+  }
+  .newspaper-portrait img {
+    height:370px;
   }
   .section-pad {
     padding:85px 0 0;
@@ -1374,11 +1415,6 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     font-size:10px;
     gap:8px;
   }
-  .couple-portrait {
-    width:200px;
-    bottom:0;
-    left:0;
-  }
 }
 @media(max-width:599px) {
   .hero {
@@ -1412,17 +1448,11 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
   .hero-date {
     font-size:8px;
   }
-  .hero-art {
-    margin-top:5px;
-    height:330px;
+  .hero-scene {
+    height:390px;
   }
   .art-caption {
-    bottom:35px;
-    left:-15px;
     font-size:14px;
-  }
-  .floating-teddy.is-traveling {
-    opacity:.43;
   }
   .countdown {
     gap:6px;
@@ -1602,6 +1632,9 @@ html:not(.js) #countdown,html:not(.js) #countdown-caption {
     padding-block:45px;
   }
   .hero-art {
+    padding-top:0;
+  }
+  .hero-scene {
     height:300px;
   }
   .section-pad {

@@ -62,11 +62,17 @@ The template author's `CNAME` has been removed. Add your own only if you have co
 
 ## Interaction checks
 
-- Scroll through the page: one teddy moves from the hero toward the outer edge, with a gentle sway. It cannot intercept taps. Reduced-motion mode uses a stationary hero illustration.
+- Scroll through the page: one teddy follows a gentle wave from side to side, with a soft vertical float. It is translucent in open areas and fades behind foreground text, portraits, the map and RSVP, then reappears as the content passes. Elements marked `data-teddy-cover` define these foreground areas; their actual screen positions determine the fade. It cannot intercept taps. Reduced-motion mode uses a stationary hero illustration.
 - Scratch the baby-arrival card with touch or a mouse, or use the keyboard-accessible reveal button. Reloading preserves an already revealed card when local storage is available.
 - The countdown uses Hamilton's start time even when the visitor is elsewhere. At the start it becomes a celebratory message.
 - The calendar button downloads an `.ics` with the correct start, venue and maps link. No end time is added.
 - Enlarge the parking map, use the zoom controls, and close with the close button, Escape or the backdrop.
 - On the custom form, check invalid inputs, count limits and a network failure using a test receiver before launch. A success requires a matching server receipt. No production responses were sent during development.
 
-For automated browser checks, install Playwright separately in your development environment and run `npm run test:browser`. An optional `PLAYWRIGHT_EXECUTABLE_PATH` selects an existing Chromium executable. These checks use local files and mocked form responses, not a real guest Sheet. Screenshots are written to ignored `test-results/`.
+For automated browser checks, install Playwright separately in your development environment and run `npm run test:browser`. Set `BROWSER_ENGINE=webkit` to exercise the Safari engine instead of Chromium. An optional `PLAYWRIGHT_EXECUTABLE_PATH` selects a matching browser executable. These checks use local files and mocked form responses, not a real guest Sheet. Screenshots are written to ignored `test-results/`.
+
+Run `npm run test:mobile` with a current Playwright installation and its Chromium and WebKit browsers for the mobile motion matrix. It covers every available iPhone profile from iPhone 13 onward in WebKit, plus Galaxy S24, Galaxy A55, Pixel 9 and Pixel 10 Pro XL in Chromium. Each profile checks side-to-side scrolling, portrait/landscape sizes, a shorter viewport, positioning, caption clearance and touch passthrough. Reduce Motion preference changes are checked in both engines. `BROWSER_ENGINE=webkit` or `BROWSER_ENGINE=chromium` limits the run to one engine. These are emulated devices; they do not certify physical hardware, the actual Safari/Chrome apps, or OS power-saving modes. iOS Chrome normally uses the same WebKit engine as Safari.
+
+The teddy respects the device's Reduce Motion preference. On an iPhone, find it under Settings → Accessibility → Motion → Reduce Motion. It floats automatically when Reduce Motion is off, and stays still when it is on. Changes to the device preference are applied immediately. There is no teddy control button on the invitation.
+
+The opening watercolor portrait uses the supplied IMG_6929 photograph. The heart-hands portrait accompanies the February reveal, and the IMG_6845 newspaper pose accompanies the shower details. The caption below the opening artwork is in normal document flow; the decorative flowers are contained inside the separate artwork frame. Only the generated WebP illustrations are published, not the original personal photographs.

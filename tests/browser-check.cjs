@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { chromium } = require('playwright');
+const { chromium, webkit } = require('playwright');
 
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'test-results');
@@ -9,7 +9,9 @@ const fakeEndpoint = 'https://script.google.com/macros/s/test-receiver/exec';
 fs.mkdirSync(output, { recursive: true });
 
 (async () => {
-  const browser = await chromium.launch({ headless: true,
+  const engine = process.env.BROWSER_ENGINE || 'chromium';
+  assert.ok(['chromium', 'webkit'].includes(engine), 'BROWSER_ENGINE must be chromium or webkit');
+  const browser = await ({ chromium, webkit })[engine].launch({ headless: true,
     ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH } : {}) });
   let checks = 0;
   const errors = [];
@@ -59,9 +61,18 @@ fs.mkdirSync(output, { recursive: true });
     const travelPose = await page.locator('#floating-teddy').evaluate((el) => el.style.transform);
     assert.notEqual(initialPose, travelPose);
     assert.equal(await page.locator('#floating-teddy').evaluate((el) => getComputedStyle(el).pointerEvents), 'none');
-    const bearLeft = await page.locator('#floating-teddy').evaluate((el) => el.getBoundingClientRect().left);
-    assert.ok(bearLeft >= 310, 'traveling teddy stays in the phone margin');
-    checks += 3;
+    async function teddyCenterAt(progress) {
+      await page.evaluate((value) => window.scrollTo({
+        top: (document.documentElement.scrollHeight - innerHeight) * value, behavior: 'instant'
+      }), progress);
+      await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+      return page.locator('#floating-teddy').evaluate((el) => {
+        const rect = el.getBoundingClientRect(); return rect.left + rect.width / 2;
+      });
+    }
+    assert.ok(await teddyCenterAt(.5) < 390 * .4, 'teddy crosses to the left');
+    assert.ok(await teddyCenterAt(2 / 3) > 390 * .6, 'teddy returns to the right');
+    checks += 4;
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `no overflow at ${width}px`);

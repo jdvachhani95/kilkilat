@@ -50,16 +50,40 @@ test('RSVP rejects invalid email, missing name, fractional, negative and excessi
   }
 });
 
-test('teddy stays at the phone edge after leaving the hero and has finite poses', () => {
+test('teddy crosses both sides of the screen and stays within phone and desktop viewports', () => {
   assert.equal(typeof core.teddyPose, 'function');
-  for (const width of [320, 390, 768, 1440]) {
-    for (const progress of [0, 0.2, 0.5, 1]) {
-      const pose = core.teddyPose(progress, { width, height: 844, heroProgress: 1 });
+  for (const [width, height] of [[320, 667], [390, 844], [440, 956], [844, 390], [768, 900], [1440, 1000]]) {
+    const viewport = { width, height, heroProgress: 1 };
+    const left = core.teddyPose(.5, viewport);
+    const right = core.teddyPose(2 / 3, viewport);
+    assert.ok(left.x + left.width / 2 < width * .35, 'reaches the left side');
+    assert.ok(right.x + right.width / 2 > width * .65, 'returns to the right side');
+    let previous;
+    for (let step = 0; step <= 500; step++) {
+      const pose = core.teddyPose(step / 500, viewport);
       assert.ok(Number.isFinite(pose.x) && Number.isFinite(pose.y) && Number.isFinite(pose.rotation));
-      assert.ok(pose.y >= 0 && pose.y < 844);
-      if (width < 600) assert.ok(pose.x >= width - 80, 'phone content area stays clear');
+      assert.ok(pose.x >= 0 && pose.x + pose.width <= width);
+      assert.ok(pose.y >= 0 && pose.y + pose.width * 1.5 <= height);
+      if (previous) assert.ok(Math.abs(pose.x - previous.x) < width * .03, 'no jumps across the page');
+      previous = pose;
     }
   }
+});
+
+test('traveling teddy is translucent in open space and disappears behind foreground content', () => {
+  assert.equal(typeof core.teddyOpacity, 'function');
+  const pose = core.teddyPose(.5, { width: 390, height: 844, heroProgress: 1 });
+  const clear = core.teddyOpacity(pose, []);
+  assert.ok(clear > .2 && clear < .6, 'softly visible in an open area');
+  const cover = { left: pose.x - 20, right: pose.x + pose.width + 20,
+    top: pose.y - 20, bottom: pose.y + pose.width * 1.5 + 20 };
+  assert.equal(core.teddyOpacity(pose, [cover]), 0, 'hidden behind a foreground section');
+  const partial = core.teddyOpacity(pose, [{ ...cover, right: pose.x + pose.width / 2 }]);
+  assert.ok(partial > 0 && partial < clear, 'fades progressively at the section edge');
+  assert.equal(core.teddyOpacity(pose, [{ ...cover, top: 1200, bottom: 1400 }]), clear,
+    'reappears when the section has passed');
+  const hero = core.teddyPose(0, { width: 390, height: 844, heroProgress: 0 });
+  assert.equal(core.teddyOpacity(hero, [cover]), 1, 'hero illustration stays clear');
 });
 
 test('the phone hero places the teddy below the invitation text', () => {

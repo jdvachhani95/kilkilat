@@ -50,19 +50,37 @@
     const hero = clamp(viewport.heroProgress || 0, 0, 1);
     const eased = 1 - Math.pow(1 - hero, 3);
     const phone = viewport.width <= 720;
-    const bearWidth = phone ? 150 : viewport.width < 1000 ? 180 : 235;
+    const bearWidth = Math.min(phone ? 150 : viewport.width < 1000 ? 180 : 235, viewport.height * .42);
     const startX = phone ? viewport.width * 0.64 - bearWidth / 2 : viewport.width * 0.78 - bearWidth / 2;
-    const edgeX = phone ? viewport.width - 65 : viewport.width - bearWidth * 0.56;
+    const inset = phone ? 20 : 30;
+    const wave = p * Math.PI * 6;
+    const travelX = inset + Math.max(0, viewport.width - bearWidth - inset * 2) * (.5 + Math.cos(wave) * .5);
     const startY = phone ? (Number.isFinite(viewport.heroStartY)
       ? viewport.heroStartY : Math.max(490, viewport.height * 0.59)) : viewport.height * 0.2;
-    const edgeY = viewport.height * (0.22 + Math.sin(p * Math.PI * 4) * 0.1);
+    const travelY = clamp(viewport.height * (.2 + Math.sin(wave) * .075),
+      85, Math.max(85, viewport.height - bearWidth * 1.5 - 24));
     return {
-      x: startX + (edgeX - startX) * eased,
-      y: startY + (edgeY - startY) * eased,
-      rotation: Math.sin(p * Math.PI * 7) * 7 * eased,
-      width: bearWidth
+      x: startX + (travelX - startX) * eased,
+      y: startY + (travelY - startY) * eased,
+      rotation: Math.sin(wave) * 6 * eased,
+      width: bearWidth,
+      depth: eased,
+      opacity: 1 + ((phone ? .4 : .48) - 1) * eased
     };
   }
 
-  return { countdown, rsvpIsOpen, validateRsvp, canSubmitRsvp, teddyPose };
+  function teddyOpacity(pose, regions = []) {
+    // The portrait illustration is 2:3. Foreground reading areas obscure it
+    // progressively; a small margin keeps the artwork away from text edges.
+    const height = pose.width * 1.5;
+    let coverage = 0;
+    for (const region of regions) {
+      const width = Math.max(0, Math.min(pose.x + pose.width, region.right + 12) - Math.max(pose.x, region.left - 12));
+      const overlapHeight = Math.max(0, Math.min(pose.y + height, region.bottom + 12) - Math.max(pose.y, region.top - 12));
+      coverage = Math.max(coverage, width * overlapHeight / (pose.width * height));
+    }
+    return pose.opacity * (1 - clamp(coverage / .8, 0, 1) * pose.depth);
+  }
+
+  return { countdown, rsvpIsOpen, validateRsvp, canSubmitRsvp, teddyPose, teddyOpacity };
 }));
