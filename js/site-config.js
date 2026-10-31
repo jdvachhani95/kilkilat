@@ -10,6 +10,6 @@ window.INVITATION_CONFIG = Object.freeze({
   rsvpEndpoint: '',
   // Optional official Google Form URL, used instead if you prefer Google Forms.
   googleFormUrl: '',
-  // Add the illustrated portrait created from your own photos when available.
-  portraitImage: ''
+  // Watercolor portrait based on the hosts' supplied IMG_6929 photograph.
+  portraitImage: 'img/invitation/memories/couple-6929.webp'
 });

@@ -20,34 +20,49 @@
     const teddy = byId('floating-teddy');
     const stage = byId('teddy-stage');
     const progressBar = byId('scroll-progress');
+    const foreground = [...document.querySelectorAll('[data-teddy-cover]')];
+    let motionEnabled = !motion.matches;
     let pending = false;
     function update() {
       pending = false;
-      const scroll = window.scrollY;
-      stage.style.height = motion.matches ? byId('welcome').offsetHeight + 'px' : '';
+      // Safari can report negative scroll during its rubber-band overscroll.
+      const scroll = Math.max(0, window.scrollY);
+      const viewport = window.visualViewport;
+      const height = viewport && viewport.scale === 1 ? viewport.height : window.innerHeight;
+      stage.style.height = motionEnabled ? '' : byId('welcome').offsetHeight + 'px';
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const progress = max > 0 ? Math.min(1, Math.max(0, scroll / max)) : 0;
       const phone = window.innerWidth <= 720;
       const artTop = document.querySelector('.hero-art').getBoundingClientRect().top + scroll;
-      const travelStart = phone ? Math.max(0, artTop - window.innerHeight * 0.45) : 0;
-      const heroProgress = motion.matches ? 0 : Math.max(0, Math.min(1, (scroll - travelStart) / (window.innerHeight * 0.65)));
-      const pose = core.teddyPose(motion.matches ? 0 : progress, {
-        width: window.innerWidth, height: window.innerHeight, heroProgress,
-        heroStartY: phone ? artTop + 8 - (motion.matches ? 0 : scroll) : undefined
+      const travelStart = phone ? Math.max(0, artTop - height * 0.45) : 0;
+      const heroProgress = motionEnabled ? Math.max(0, Math.min(1, (scroll - travelStart) / (height * 0.65))) : 0;
+      const pose = core.teddyPose(motionEnabled ? progress : 0, {
+        width: window.innerWidth, height, heroProgress,
+        heroStartY: phone ? artTop + 8 - (motionEnabled ? scroll : 0) : undefined
       });
       teddy.style.width = pose.width + 'px';
       teddy.style.transform = `translate3d(${pose.x}px, ${pose.y}px, 0) rotate(${pose.rotation}deg)`;
-      teddy.classList.toggle('is-traveling', heroProgress > 0.8);
+      teddy.style.opacity = String(core.teddyOpacity(pose,
+        heroProgress > 0 ? foreground.map((el) => el.getBoundingClientRect()) : []));
       progressBar.style.transform = `scaleX(${progress})`;
     }
     function schedule() { if (!pending) { pending = true; requestAnimationFrame(update); } }
     function preferenceChanged() {
+      motionEnabled = !motion.matches;
       document.body.classList.toggle('motion-reduced', motion.matches);
       schedule();
     }
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule, { passive: true });
-    motion.addEventListener('change', preferenceChanged);
+    window.addEventListener('pageshow', schedule);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', schedule, { passive: true });
+      window.visualViewport.addEventListener('scroll', schedule, { passive: true });
+    }
+    if (motion.addEventListener) motion.addEventListener('change', preferenceChanged);
+    else if (motion.addListener) motion.addListener(preferenceChanged);
+    // Teddy positioning must not depend on IntersectionObserver availability.
+    document.documentElement.classList.add('teddy-ready');
     preferenceChanged();
     update();
     if ('IntersectionObserver' in window) {
@@ -94,7 +109,7 @@
         'BEGIN:VEVENT', 'UID:jaydeep-aruni-baby-shower-20261129@invitation.local',
         'DTSTAMP:' + stamp(new Date()), 'DTSTART:' + stamp(new Date(config.eventStart)),
         'SUMMARY:' + escape(config.parents + ' — Baby shower & gender reveal'),
-        'LOCATION:Magnolia Hall\\, Hamilton\\, Ontario',
+        'LOCATION:' + escape('Magnolia Hall, 115 Hunter Street West, Hamilton, Ontario'),
         'DESCRIPTION:' + escape('Baby shower and gender reveal, 10 AM onwards. Please park at City Hall Parking. Directions to Magnolia Hall: ' + config.mapsUrl),
         'URL:' + config.mapsUrl, 'END:VEVENT', 'END:VCALENDAR'];
       const url = URL.createObjectURL(new Blob([lines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' }));

@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "npm run build && python3 -m http.server 4173 --bind 127.0.0.1 --directory _site",
     "build": "node scripts/build.cjs",
-    "test": "node --test tests/invitation.test.cjs",
+    "test": "node --test tests/*.test.cjs",
     "test:browser": "node tests/browser-check.cjs",
+    "test:mobile": "node tests/mobile-motion.cjs",
     "check": "node --check js/site-config.js && node --check js/invitation-core.js && node --check js/invitation.js"
   },
   "repository": {

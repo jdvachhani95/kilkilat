@@ -12,6 +12,7 @@
   <link rel="icon" href="img/invitation/heart.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/invitation.css">
   <link rel="preload" href="img/invitation/teddy.webp" as="image">
+  <link rel="preload" href="img/invitation/memories/couple-6929.webp" as="image">
   <script src="js/site-config.js" defer></script>
   <script src="js/invitation-core.js" defer></script>
   <script src="js/invitation.js" defer></script>
@@ -31,7 +32,7 @@
     <section class="hero" id="welcome" aria-labelledby="hero-title">
       <img class="floral hero-floral-top" src="img/invitation/florals.webp" width="1297" height="1212" alt="" aria-hidden="true">
       <div class="hero-layout content-width">
-        <div class="hero-copy">
+        <div class="hero-copy" data-teddy-cover>
           <p class="eyebrow hero-enter"><span class="announcement-tag"><span aria-hidden="true">✦</span> Oh, baby! <span aria-hidden="true">✦</span></span></p>
           <h1 class="hero-enter" id="hero-title">We’re having<br>a <em>baby!</em></h1>
           <div class="botanical-divider hero-enter" aria-hidden="true">❧ <span>♡</span> ❧</div>
@@ -40,18 +41,22 @@
           <a class="button hero-enter" href="#celebrate">Come celebrate with us <span aria-hidden="true">↗</span></a>
           <p class="hero-date hero-enter">Baby shower + gender reveal<br>November 29, 2026 <span aria-hidden="true">·</span> Hamilton, ON</p>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="watercolor-orbit"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
-          <span class="little-spark spark-one">✧</span><span class="little-spark spark-two">✧</span>
-          <img class="couple-portrait" id="couple-portrait" alt="" hidden>
-          <img class="floral hero-floral-bottom" src="img/invitation/florals.webp" width="1297" height="1212" alt="">
-          <span class="art-caption">baby on board. hearts so full.</span>
-        </div>
+        <figure class="hero-art" data-teddy-cover>
+          <div class="hero-scene">
+            <div class="watercolor-orbit" aria-hidden="true"></div><div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div>
+            <span class="little-spark spark-one" aria-hidden="true">✧</span><span class="little-spark spark-two" aria-hidden="true">✧</span>
+            <img class="couple-portrait" id="couple-portrait" src="img/invitation/memories/couple-6929.webp" width="942" height="1670" alt="Watercolor illustration of Aruni and Jaydeep playfully cradling their bellies together." fetchpriority="high">
+            <img class="floral hero-floral-bottom" src="img/invitation/florals.webp" width="1297" height="1212" alt="" aria-hidden="true">
+          </div>
+          <figcaption class="art-caption">baby on board. hearts so full.</figcaption>
+        </figure>
       </div>
       <a class="scroll-invitation" href="#little-surprise"><span>There’s more happy news below</span><span class="scroll-line" aria-hidden="true"></span></a>
     </section>
     <section class="surprise section-pad" id="little-surprise" aria-labelledby="surprise-title">
-      <div class="narrow-content reveal-on-scroll">
+      <div class="arrival-layout content-width">
+        <figure class="memory-portrait arrival-portrait reveal-on-scroll" data-teddy-cover><img src="img/invitation/memories/aruni-heart.webp" width="1086" height="1448" loading="lazy" alt="Watercolor illustration of Aruni making a heart with her hands over her baby bump."></figure>
+      <div class="narrow-content reveal-on-scroll" data-teddy-cover>
         <p class="eyebrow">Our growing family</p>
         <h2 id="surprise-title">Tiny feet.<br><em>Big news!</em></h2>
         <p class="section-intro">Our newest adventure is on the way.<br>Scratch below for a hello from baby!</p>
@@ -65,16 +70,18 @@
           <p class="scratch-after" id="scratch-after" hidden>Our little one is arriving in February. We can’t wait!</p>
         </div><p id="reveal-announcement" class="sr-only" role="status"></p>
       </div>
+      </div>
     </section>
     <section class="celebration section-pad" id="celebrate" aria-labelledby="celebration-title">
       <img class="floral event-floral" src="img/invitation/florals.webp" width="1297" height="1212" alt="" aria-hidden="true" loading="lazy">
-      <div class="narrow-content reveal-on-scroll">
+      <div class="celebration-layout content-width">
+      <div class="narrow-content reveal-on-scroll" data-teddy-cover>
         <p class="eyebrow">You’re invited!</p>
         <h2 id="celebration-title">Baby shower.<br><em>Big reveal!</em></h2>
         <p class="section-intro">A baby to celebrate. A gender reveal to cheer for!<br>We’d love to share the surprise with you!</p>
         <div class="event-date-block">
           <div class="calendar-date" aria-hidden="true"><span>NOV</span><strong>29</strong><span>2026</span></div>
-          <div class="event-date-copy"><p>Sunday, November 29, 2026</p><strong>10:00 AM onwards</strong><span>Magnolia Hall · Hamilton, Ontario</span></div>
+          <div class="event-date-copy"><p>Sunday, November 29, 2026</p><strong>10:00 AM onwards</strong><span>Magnolia Hall<br>115 Hunter Street West<br>Hamilton, Ontario</span></div>
         </div>
         <p class="countdown-caption" id="countdown-caption">The countdown to the big surprise is on!</p>
         <div class="countdown" id="countdown" role="timer" aria-label="Time until the baby shower" aria-live="off">
@@ -84,18 +91,20 @@
           <div><span id="countdown-seconds">—</span><small>Seconds</small></div>
         </div>
         <button class="text-button calendar-button" type="button" id="add-to-calendar" hidden><span aria-hidden="true">＋</span> Add the party to your calendar</button>
-        <div class="gift-note"><span aria-hidden="true">♡</span><p>No boxed gifts, please ♡ Gift cards or contributions towards baby’s needs are welcome.</p></div>
+        <div class="gift-note"><span aria-hidden="true">♡</span><p>Your presence means the most! If you’d wish to bring something, gift cards or contributions are warmly appreciated in place of boxed gifts.</p></div>
+      </div>
+      <figure class="memory-portrait newspaper-portrait reveal-on-scroll" data-teddy-cover><img src="img/invitation/memories/newspaper-6845.webp" width="941" height="1672" loading="lazy" alt="Watercolor illustration of Jaydeep and Aruni holding newspapers marked Dad and Mom."></figure>
       </div>
     </section>
     <section class="venue section-pad" id="venue" aria-labelledby="venue-title">
       <div class="venue-layout content-width reveal-on-scroll">
-        <div class="venue-copy">
+        <div class="venue-copy" data-teddy-cover>
           <p class="eyebrow">Meet us here</p><h2 id="venue-title">Here’s where<br>we’ll <em>celebrate.</em></h2>
-          <div class="venue-address"><h3>Magnolia Hall</h3><p>Hamilton, Ontario</p></div><p>We can’t wait to welcome you.</p>
+          <div class="venue-address"><h3>Magnolia Hall</h3><p>115 Hunter Street West<br>Hamilton, Ontario</p></div><p>We can’t wait to welcome you.</p>
           <div class="parking-note"><span class="parking-icon" aria-hidden="true">P</span><p><strong>Park at City Hall Parking</strong>Look for “Park here” on the map. Magnolia Hall is marked separately, across Hunter Street West.</p></div>
           <a class="button" id="maps-link" href="https://maps.app.goo.gl/ggcyZocf3u9xvAgi6" target="_blank" rel="noopener noreferrer">Open Google Maps <span aria-hidden="true">↗</span><span class="sr-only"> for Magnolia Hall (opens a new tab)</span></a>
         </div>
-        <figure class="venue-map">
+        <figure class="venue-map" data-teddy-cover>
           <button type="button" class="map-open" id="open-map" aria-haspopup="dialog" aria-label="Enlarge illustrated map showing Magnolia Hall and City Hall Parking"><img src="img/magnolia-hall-parking-map-v1.webp" width="1514" height="1039" loading="lazy" alt="Illustrated map: Magnolia Hall is below Hunter Street West, left of the central intersection. City Hall Parking is above Hunter Street West to the right, marked Park here."><span class="map-expand"><span aria-hidden="true">⤢</span> A closer look</span></button>
           <figcaption>“Park here” = City Hall Parking. The Google Maps button gives directions to Magnolia Hall.</figcaption>
         </figure>
@@ -103,7 +112,7 @@
     </section>
     <section class="rsvp section-pad" id="rsvp" aria-labelledby="rsvp-title">
       <img class="floral rsvp-floral" src="img/invitation/florals.webp" width="1297" height="1212" alt="" aria-hidden="true" loading="lazy">
-      <div class="form-content reveal-on-scroll">
+      <div class="form-content reveal-on-scroll" data-teddy-cover>
         <p class="eyebrow">Come join the fun</p><h2 id="rsvp-title">We’d love to have you <em>with us.</em></h2>
         <p class="section-intro">Let us know who’s coming along.</p><p class="rsvp-deadline">Please RSVP by <strong>November 15, 2026</strong></p>
         <p class="form-availability" id="form-availability" role="status">Our RSVP form will be ready soon. Please check back before November 15.</p>
