@@ -2,6 +2,7 @@
 window.INVITATION_CONFIG = Object.freeze({
   parents: 'Aruni & Jaydeep',
   eventStart: '2026-11-29T10:00:00-05:00',
+  eventEnd: '2026-11-29T14:00:00-05:00',
   arrivalMonth: 'February',
   rsvpDeadline: '2026-11-15T23:59:59-05:00',
   mapsUrl: 'https://maps.app.goo.gl/ggcyZocf3u9xvAgi6',

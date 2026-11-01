@@ -10,7 +10,7 @@ Open `index.html` in a browser for a disconnected preview, or run `npm run dev` 
 
 Edit `js/site-config.js`. The confirmed names, event date, arrival month, deadline and Magnolia Hall link are already entered. All values in this file are public. Never add Google credentials or private API keys.
 
-The event is November 29, 2026, **10 AM onwards**, Hamilton time. The fixed countdown timestamp is `2026-11-29T10:00:00-05:00`. No end time is invented. The scratch card says “See you in February!”; no due day or year is stored in the public configuration. The gender reveal takes place in person at the shower. RSVPs close after November 15, Hamilton time. If the deadline changes, update it in both the site configuration and Apps Script.
+The event is November 29, 2026, Hamilton time. The fixed countdown timestamp is `2026-11-29T10:00:00-05:00`. Calendar downloads run from **10 AM to 2 PM**, with the end timestamp `2026-11-29T14:00:00-05:00`. The scratch card says “See you in February!”; no due day or year is stored in the public configuration. The gender reveal takes place in person at the shower. RSVPs close after November 15, Hamilton time. If the deadline changes, update it in both the site configuration and Apps Script.
 
 ## Connect the custom RSVP form to a private Sheet
 
@@ -67,7 +67,7 @@ The template author's `CNAME` has been removed. Add your own only if you have co
 - Scroll through the page: one teddy follows a gentle wave from side to side, with a soft vertical float. It is translucent in open areas and fades behind foreground text, portraits, the map and RSVP, then reappears as the content passes. Elements marked `data-teddy-cover` define these foreground areas; their actual screen positions determine the fade. It cannot intercept taps. Reduced-motion mode uses a stationary hero illustration.
 - Scratch the baby-arrival card with touch or a mouse, or use the keyboard-accessible reveal button. Reloading preserves an already revealed card when local storage is available.
 - The countdown uses Hamilton's start time even when the visitor is elsewhere. At the start it becomes a celebratory message.
-- Calendar buttons in the event details and confirmed RSVP download the same `.ics` with the correct start, full venue address, parking guidance and maps link. The RSVP confirmation option appears only after a matching server receipt. No end time is added.
+- Calendar buttons in the event details and confirmed RSVP download the same `.ics` for November 29, 2026, **10 AM–2 PM Hamilton time**, with the full venue address, parking guidance and maps link. The RSVP confirmation option appears only after a matching server receipt.
 - Enlarge the parking map, use the zoom controls, and close with the close button, Escape or the backdrop.
 - On the custom form, check invalid inputs, count limits and a network failure using a test receiver before launch. A success requires a matching server receipt. No production responses were sent during development.
 

@@ -27,15 +27,18 @@ test('confirmed RSVP offers a calendar download with the event time, full addres
   assert.equal(download.blob.type, 'text/calendar;charset=utf-8');
   const calendar = await download.blob.text();
   assert.match(calendar, /DTSTART:20261129T150000Z\r\n/);
+  assert.match(calendar, /DTEND:20261129T190000Z\r\n/);
+  assert.match(calendar, /10 AM–2 PM/);
   assert.match(calendar, /SUMMARY:Aruni & Jaydeep — Baby shower & gender reveal\r\n/);
   assert.match(calendar, /LOCATION:Magnolia Hall\\, 115 Hunter Street West\\, Hamilton\\, Ontario\r\n/);
   assert.match(calendar, /City Hall Parking/);
   assert.match(calendar, /URL:https:\/\/maps\.app\.goo\.gl\/ggcyZocf3u9xvAgi6\r\n/);
-  assert.doesNotMatch(calendar, /DTEND|Test Family|family@example\.com/);
+  assert.doesNotMatch(calendar, /Test Family|family@example\.com/);
   await browser.ids['add-to-calendar'].dispatch('click');
   const original = await browser.downloads[1].blob.text();
   assert.equal(original.match(/UID:.+/)[0], calendar.match(/UID:.+/)[0]);
   assert.equal(original.match(/DTSTART:.+/)[0], calendar.match(/DTSTART:.+/)[0]);
+  assert.equal(original.match(/DTEND:.+/)[0], calendar.match(/DTEND:.+/)[0]);
 });
 
 test('unconfirmed RSVP keeps the confirmation and its calendar option hidden', async () => {

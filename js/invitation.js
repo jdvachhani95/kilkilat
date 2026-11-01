@@ -107,9 +107,10 @@
       const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Aruni and Jaydeep//Baby Shower//EN',
         'BEGIN:VEVENT', 'UID:jaydeep-aruni-baby-shower-20261129@invitation.local',
         'DTSTAMP:' + stamp(new Date()), 'DTSTART:' + stamp(new Date(config.eventStart)),
+        'DTEND:' + stamp(new Date(config.eventEnd)),
         'SUMMARY:' + escape(config.parents + ' — Baby shower & gender reveal'),
         'LOCATION:' + escape('Magnolia Hall, 115 Hunter Street West, Hamilton, Ontario'),
-        'DESCRIPTION:' + escape('Baby shower and gender reveal, 10 AM onwards. Please park at City Hall Parking. Directions to Magnolia Hall: ' + config.mapsUrl),
+        'DESCRIPTION:' + escape('Baby shower and gender reveal, 10 AM–2 PM (Hamilton time). Please park at City Hall Parking. Directions to Magnolia Hall: ' + config.mapsUrl),
         'URL:' + config.mapsUrl, 'END:VEVENT', 'END:VCALENDAR'];
       const url = URL.createObjectURL(new Blob([lines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' }));
       const link = document.createElement('a');
