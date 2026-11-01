@@ -67,7 +67,7 @@ The template author's `CNAME` has been removed. Add your own only if you have co
 - Scroll through the page: one teddy follows a gentle wave from side to side, with a soft vertical float. It is translucent in open areas and fades behind foreground text, portraits, the map and RSVP, then reappears as the content passes. Elements marked `data-teddy-cover` define these foreground areas; their actual screen positions determine the fade. It cannot intercept taps. Reduced-motion mode uses a stationary hero illustration.
 - Scratch the baby-arrival card with touch or a mouse, or use the keyboard-accessible reveal button. Reloading preserves an already revealed card when local storage is available.
 - The countdown uses Hamilton's start time even when the visitor is elsewhere. At the start it becomes a celebratory message.
-- The calendar button downloads an `.ics` with the correct start, venue and maps link. No end time is added.
+- Calendar buttons in the event details and confirmed RSVP download the same `.ics` with the correct start, full venue address, parking guidance and maps link. The RSVP confirmation option appears only after a matching server receipt. No end time is added.
 - Enlarge the parking map, use the zoom controls, and close with the close button, Escape or the backdrop.
 - On the custom form, check invalid inputs, count limits and a network failure using a test receiver before launch. A success requires a matching server receipt. No production responses were sent during development.
 

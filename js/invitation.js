@@ -101,8 +101,7 @@
     if (!update()) {
       const timer = setInterval(() => { if (update()) clearInterval(timer); }, 1000);
     }
-    byId('add-to-calendar').hidden = false;
-    byId('add-to-calendar').addEventListener('click', () => {
+    const downloadCalendar = () => {
       const escape = (text) => text.replace(/\\/g, '\\\\').replace(/\r?\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
       const stamp = (date) => date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
       const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Aruni and Jaydeep//Baby Shower//EN',
@@ -120,6 +119,11 @@
       link.click();
       link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+    ['add-to-calendar', 'rsvp-add-to-calendar'].forEach((id) => {
+      const button = byId(id);
+      button.hidden = false;
+      button.addEventListener('click', downloadCalendar);
     });
   }
 

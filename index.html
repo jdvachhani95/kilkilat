@@ -127,7 +127,11 @@
           <div class="honeypot" aria-hidden="true"><label for="company">Leave this field empty</label><input name="company" id="company" type="text" tabindex="-1" autocomplete="off"></div>
           <button class="button submit-button" id="submit-rsvp" type="submit" disabled><span>Send RSVP</span><span aria-hidden="true">↗</span></button><p id="form-status" class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
         </form>
-        <div class="rsvp-success" id="rsvp-success" hidden tabindex="-1"><span aria-hidden="true">♡</span><h3>Yay! See you at the party!</h3><p>Thank you for letting us know.<br>We’re looking forward to celebrating with you!</p><p id="rsvp-receipt"></p></div>
+        <div class="rsvp-success" id="rsvp-success" hidden tabindex="-1">
+          <span aria-hidden="true">♡</span><h3>Yay! See you at the party!</h3>
+          <p>Thank you for letting us know.<br>We’re looking forward to celebrating with you!</p><p id="rsvp-receipt"></p>
+          <button class="text-button calendar-button" type="button" id="rsvp-add-to-calendar" hidden><span aria-hidden="true">＋</span> Add to your calendar</button>
+        </div>
         <noscript><p>Please enable JavaScript to use the RSVP form.</p></noscript>
       </div>
     </section>

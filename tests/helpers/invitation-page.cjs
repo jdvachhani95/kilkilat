@@ -8,6 +8,8 @@ const core = require('../../js/invitation-core.js');
 function page({ reduced = false, legacy = false, config = {}, fetch: fetchResponse } = {}) {
   const root = path.resolve(__dirname, '../..');
   const frames = [];
+  const downloads = [];
+  const blobs = new Map();
   const events = () => {
     const listeners = new Map();
     return {
@@ -57,10 +59,21 @@ function page({ reduced = false, legacy = false, config = {}, fetch: fetchRespon
   const document = { ...events(), body: element(), documentElement: { ...element(), scrollHeight: 6400 },
     getElementById: (id) => ids[id], querySelectorAll: (selector) => selector === '[data-teddy-cover]' ? covers : [],
     querySelector: (selector) => selector === '.hero-art' ? art : element() };
+  document.body.append = () => {};
+  document.createElement = () => {
+    const link = element();
+    link.click = () => downloads.push({ filename: link.download, blob: blobs.get(link.href) });
+    link.remove = () => {};
+    return link;
+  };
   const context = vm.createContext({ window, document,
     localStorage: { getItem: () => null, setItem() {} },
     requestAnimationFrame: (fn) => frames.push(fn), setInterval() {}, setTimeout() {}, clearTimeout() {},
-    URLSearchParams, AbortController, fetch: fetchResponse,
+    URLSearchParams, AbortController, fetch: fetchResponse, Blob,
+    URL: {
+      createObjectURL(blob) { const url = 'blob:calendar-' + blobs.size; blobs.set(url, blob); return url; },
+      revokeObjectURL: (url) => blobs.delete(url)
+    },
     FormData: class {
       *[Symbol.iterator]() {
         for (const [name, id] of Object.entries({ name: 'guest-name', email: 'guest-email', adults: 'adults', children: 'children', company: 'company' })) {
@@ -72,7 +85,7 @@ function page({ reduced = false, legacy = false, config = {}, fetch: fetchRespon
   window.INVITATION_CONFIG = { ...window.INVITATION_CONFIG, ...config };
   const flush = () => { while (frames.length) frames.shift()(); };
   const start = () => { vm.runInContext(fs.readFileSync(path.join(root, 'js/invitation.js'), 'utf8'), context); flush(); };
-  return { start, flush, ids, window, viewport, preference, document, covers };
+  return { start, flush, ids, window, viewport, preference, document, covers, downloads };
 }
 
 module.exports = { page };
