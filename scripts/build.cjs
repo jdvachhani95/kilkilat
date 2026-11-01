@@ -1,14 +1,22 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, '_site');
 const envPath = path.join(root, '.env');
+const actionsBuild = process.env.GITHUB_ACTIONS === 'true';
 // Existing shell/Actions environment values take priority over the local file.
-if (fs.existsSync(envPath)) process.loadEnvFile(envPath);
+if (!actionsBuild && fs.existsSync(envPath)) process.loadEnvFile(envPath);
 const endpoint = (process.env.RSVP_ENDPOINT || '').trim();
 if (endpoint && !/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(endpoint)) {
   throw new Error('RSVP_ENDPOINT must be a Google Apps Script web app URL ending in /exec.');
+}
+const sourceConfig = fs.readFileSync(path.join(root, 'js/site-config.js'), 'utf8');
+const publicSettings = vm.runInNewContext(sourceConfig + '\nwindow.INVITATION_CONFIG', { window: {} });
+const officialFormReady = /^https:\/\/(forms\.gle\/|docs\.google\.com\/forms\/)/.test(publicSettings.googleFormUrl);
+if (actionsBuild && !endpoint && !officialFormReady) {
+  throw new Error('RSVP_ENDPOINT is missing. Configure the Actions repository secret before publishing, or set an official Google Form URL. In Settings > Pages, select GitHub Actions as the source.');
 }
 const files = [
   'index.html', '.nojekyll', 'css/invitation.css', 'js/site-config.js',

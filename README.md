@@ -20,9 +20,9 @@ Node 22 or newer runs these commands. The build writes only the invitation's pub
 
 See [the setup guide](docs/SETUP.md). The Google Apps Script receiver is included in `apps-script/`; it creates a private response Sheet and validates every submission. Store its deployed `/exec` URL in the GitHub Actions repository secret `RSVP_ENDPOINT`, and leave `rsvpEndpoint` empty in `js/site-config.js`. The Pages build inserts the URL into the published configuration. Visitors can still see the endpoint in the deployed site. An official Google Form URL is also supported as an alternative.
 
-A disconnected source preview shows that RSVP collection is not ready; `npm run dev` uses the configured local endpoint. A successful confirmation is shown only after a matching server receipt. Three watercolor illustrations based on the hosts' supplied photographs appear in the opening, February reveal and shower sections.
+A disconnected source preview directs guests to WhatsApp for RSVPs; `npm run dev` uses the configured local endpoint. The WhatsApp fallback is hidden when an RSVP destination is configured. A successful confirmation is shown only after a matching server receipt. Three watercolor illustrations based on the hosts' supplied photographs appear in the opening, February reveal and shower sections.
 
-GitHub Pages deployment is defined in `.github/workflows/pages.yml`. Choose GitHub Actions as the Pages source in your own repository. No deployment has been made by this implementation.
+GitHub Pages deployment is defined in `.github/workflows/pages.yml`. Choose **GitHub Actions** as the Pages source so the generated `_site/` artifact is published. **Deploy from a branch** bypasses endpoint injection and publishes a blank RSVP configuration even when the repository secret is correct. Actions builds refuse to publish without an RSVP receiver or configured Google Form alternative.
 
 ## Project files
 

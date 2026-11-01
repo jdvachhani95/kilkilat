@@ -18,7 +18,9 @@ jobs:
           node-version: '22'
       - run: npm test
       - run: npm run check
-      - name: Build invitation
+      # Settings > Pages > Source must be GitHub Actions. A branch deployment
+      # serves the unconfigured source instead of this generated public artifact.
+      - name: Build invitation with RSVP configuration
         run: npm run build
         env:
           RSVP_ENDPOINT: ${{ secrets.RSVP_ENDPOINT }}

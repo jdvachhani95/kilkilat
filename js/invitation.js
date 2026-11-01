@@ -260,17 +260,22 @@
       const current = Object.fromEntries(Object.entries(fields).map(([name, input]) => [name, input.value]));
       const canSend = !serverClosed && core.canSubmitRsvp(config.rsvpDeadline, current, attempt);
       submit.disabled = inFlight || !canSend || !endpointReady;
+      let message = !endpointReady && !formLinkReady
+        ? 'Having trouble sending your RSVP? Message Aruni or Jaydeep on WhatsApp and we’ll help you out.'
+        : '';
       if (!open) {
-        availability.textContent = canSend
+        if (endpointReady || formLinkReady) message = canSend
           ? 'Our RSVP date has passed. You can still retry your unchanged details to check their confirmation.'
           : 'Our RSVP date has passed. Thank you for all the love!';
-        availability.hidden = false;
         byId('google-form-link').hidden = true;
       } else if (!endpointReady && formLinkReady) {
-        form.hidden = true; availability.hidden = true;
+        form.hidden = true;
         byId('google-form-link').href = config.googleFormUrl;
         byId('google-form-link').hidden = false;
-      } else availability.hidden = endpointReady;
+      }
+      // Only show contact guidance when no RSVP destination was configured.
+      if (availability.textContent !== message) availability.textContent = message;
+      availability.hidden = !message;
     }
     function showErrors(errors) {
       Object.entries(fields).forEach(([key, input]) => {

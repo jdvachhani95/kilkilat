@@ -14,7 +14,7 @@ The event is November 29, 2026, **10 AM onwards**, Hamilton time. The fixed coun
 
 ## Connect the custom RSVP form to a private Sheet
 
-The form is implemented, but it cannot store live responses until the hosts deploy their receiver. With an empty `rsvpEndpoint`, the invitation clearly says the form is not ready and disables submission. It never claims to save an RSVP without a confirmed server receipt.
+The custom form stores responses through the hosts’ deployed receiver. Without a configured receiver or Google Form alternative, submission is disabled and guests are advised to contact Aruni or Jaydeep on WhatsApp. This fallback is hidden when an RSVP destination is configured, including after a failed submission. It never claims to save an RSVP without a confirmed server receipt.
 
 1. Open [Google Apps Script](https://script.google.com/) in the account that should own the response Sheet, and create a new project.
 2. Paste the contents of `apps-script/Code.gs` into the project's `Code.gs`.
@@ -23,7 +23,7 @@ The form is implemented, but it cannot store live responses until the hosts depl
 5. Share **that Sheet** only with your co-hosts. Do not publish it or turn on public link sharing.
 6. Select **Deploy → New deployment → Web app**. Set **Execute as: Me** and **Who has access: Anyone**. Guests need anonymous access to submit; the script uses your permissions to write to the private Sheet. Deployment availability can depend on your Google Workspace administrator.
 7. Copy the deployed URL ending in `/exec`. In your GitHub repository, open **Settings → Secrets and variables → Actions → New repository secret**. Name it **RSVP_ENDPOINT** and paste the URL as its value. Leave `rsvpEndpoint` empty in `js/site-config.js`.
-8. After the updated workflow is pushed, run the Pages workflow on the branch you intend to deploy, or push to `main` or `master`. Adding or changing a secret alone does not trigger deployment. The build inserts the URL into `_site/js/site-config.js`, leaving the source configuration unchanged. Invalid nonempty URLs fail the build; without a secret, the default custom form stays disabled.
+8. Set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. Then run **Publish invitation to GitHub Pages** on the branch you intend to deploy, or push to `main` or `master`. Adding or changing a secret alone does not trigger deployment. The build inserts the URL into `_site/js/site-config.js`, leaving the source configuration unchanged. Invalid nonempty URLs fail the build. An Actions build also fails when the receiver secret is missing unless an official Google Form alternative is configured, preventing a release with a disabled RSVP form.
 9. Reload the deployed invitation. The form becomes available until the RSVP deadline. Make one explicitly authorized test response yourself and confirm that it appears in the private Sheet before sharing the invitation.
 
 The repository secret prevents the URL from appearing in committed source. The deployed JavaScript and browser requests still expose it to visitors, because the browser submits directly to Apps Script. Keep the response Sheet restricted; endpoint secrecy is not guest authentication. Never place Google credentials or Sheet contents in this setting.
@@ -34,7 +34,7 @@ For local use, put the same deployed `/exec` URL in the root `.env` file:
 RSVP_ENDPOINT=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
 ```
 
-The build loads `.env` automatically. Existing shell or GitHub Actions environment values take priority. `.env` and its variants are ignored by Git; `.env.example` contains only an empty template. Run `npm run dev` to build and preview with the configured endpoint. Opening the source `index.html` directly does not load `.env`. Keep the GitHub `RSVP_ENDPOINT` repository secret configured separately for deployment, since `.env` is not pushed.
+Local builds load `.env` automatically, with existing shell environment values taking priority. Actions builds use only the workflow environment and do not load `.env`. `.env` and its variants are ignored by Git; `.env.example` contains only an empty template. Run `npm run dev` to build and preview with the configured endpoint. Opening the source `index.html` directly does not load `.env`. Keep the GitHub `RSVP_ENDPOINT` repository secret configured separately for deployment, since `.env` is not pushed.
 
 When editing the Apps Script later, update its deployment to a new version. Merely saving editor changes does not update the deployed version. Keep its existing deployment URL when possible.
 
@@ -57,6 +57,8 @@ The real photos have not been supplied, so the invitation uses teddy and floral 
 1. Push the reviewed project to your own repository. In **Settings → Pages → Build and deployment**, choose **GitHub Actions**.
 2. The included `pages.yml` workflow runs checks and deploys `_site/` after a push to `main` or `master`, or when manually dispatched. The implementation branch itself is not automatically published.
 3. Open the URL provided by GitHub's deployment and check it on a phone. Relative asset links support project sites under `/repository-name/`.
+
+If RSVP stops working after a successful deployment, check the Pages **Source** first. **Deploy from a branch** publishes the unbuilt files from `main`, where `rsvpEndpoint` is intentionally empty. That deployment does not read Actions secrets and can replace a correctly built site. Select **GitHub Actions**, then rerun **Publish invitation to GitHub Pages** for `main` and reload the invitation when it finishes. The response Sheet and Apps Script deployment do not need to be recreated for this configuration issue.
 
 The template author's `CNAME` has been removed. Add your own only if you have configured a custom domain, and include it in the build allowlist. A private source repository does not normally make the published site private. Only the invitation is deployed; the response Sheet stays in your Google account.
 
