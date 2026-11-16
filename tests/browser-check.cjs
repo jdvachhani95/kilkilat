@@ -18,7 +18,7 @@ fs.mkdirSync(output, { recursive: true });
   async function makeContext(options = {}, endpoint = false, closed = false) {
     const context = await browser.newContext(options);
     await context.addInitScript(({ closed }) => {
-      Date.now = () => Date.parse(closed ? '2026-11-16T16:00:00Z' : '2026-10-27T16:00:00Z');
+      Date.now = () => Date.parse(closed ? '2026-11-23T16:00:00Z' : '2026-10-27T16:00:00Z');
     }, { closed });
     await context.route('http://invitation.test/**', async (route) => {
       const pathname = decodeURIComponent(new URL(route.request().url()).pathname);
@@ -151,7 +151,7 @@ fs.mkdirSync(output, { recursive: true });
     assert.equal(await live.page.locator('#form-availability').isVisible(), false);
     assert.equal(await live.page.locator('#rsvp-success').isVisible(), false);
     assert.equal(await live.page.locator('#rsvp-add-to-calendar').isVisible(), false); checks++;
-    await live.page.evaluate(() => { Date.now = () => Date.parse('2026-11-16T05:00:20Z'); });
+    await live.page.evaluate(() => { Date.now = () => Date.parse('2026-11-23T05:00:20Z'); });
     await live.page.locator('#submit-rsvp').click();
     await live.page.locator('#rsvp-success').waitFor();
     assert.equal(await live.page.locator('#rsvp-add-to-calendar').isVisible(), true); checks++;

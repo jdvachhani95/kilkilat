@@ -18,17 +18,17 @@ test('countdown targets Hamilton time and stops at the event without negative va
     { days: 0, hours: 0, minutes: 0, seconds: 0, started: true });
 });
 
-test('the RSVP deadline is inclusive of November 15 in Hamilton', () => {
+test('the RSVP deadline is inclusive of November 22 in Hamilton', () => {
   assert.equal(typeof core.rsvpIsOpen, 'function');
-  const deadline = '2026-11-15T23:59:59-05:00';
-  assert.equal(core.rsvpIsOpen(deadline, Date.parse('2026-11-16T04:59:59Z')), true);
-  assert.equal(core.rsvpIsOpen(deadline, Date.parse('2026-11-16T05:00:00Z')), false);
+  const deadline = '2026-11-22T23:59:59-05:00';
+  assert.equal(core.rsvpIsOpen(deadline, Date.parse('2026-11-23T04:59:59Z')), true);
+  assert.equal(core.rsvpIsOpen(deadline, Date.parse('2026-11-23T05:00:00Z')), false);
 });
 
 test('an unchanged in-flight RSVP can recover its receipt after the deadline, but new details cannot', () => {
   assert.equal(typeof core.canSubmitRsvp, 'function');
-  const deadline = '2026-11-15T23:59:59-05:00';
-  const late = Date.parse('2026-11-16T05:00:20Z');
+  const deadline = '2026-11-22T23:59:59-05:00';
+  const late = Date.parse('2026-11-23T05:00:20Z');
   const attempt = { requestId: 'a'.repeat(36), fingerprint: JSON.stringify(core.validateRsvp(good).value) };
   assert.equal(core.canSubmitRsvp(deadline, good, attempt, late), true);
   assert.equal(core.canSubmitRsvp(deadline, { ...good, adults: '3' }, attempt, late), false);
@@ -143,7 +143,7 @@ test('Apps Script stores separate counts and returns the same receipt on a netwo
   const { server, rows, releases } = receiptServer();
   const event = { parameter: { ...good, requestId: 'a'.repeat(36) } };
   const first = JSON.parse(server.doPost(event).text);
-  server.Date.now = () => Date.parse('2026-11-16T05:00:20Z');
+  server.Date.now = () => Date.parse('2026-11-23T05:00:20Z');
   const retry = JSON.parse(server.doPost(event).text);
   assert.equal(first.ok, true);
   assert.deepEqual(first, retry);
@@ -155,7 +155,7 @@ test('Apps Script stores separate counts and returns the same receipt on a netwo
 });
 
 test('Apps Script rejects late responses and keeps stored guest data out of GET responses', () => {
-  const { server, rows } = receiptServer({ now: '2026-11-16T05:00:00Z' });
+  const { server, rows } = receiptServer({ now: '2026-11-23T05:00:00Z' });
   const response = JSON.parse(server.doPost({ parameter: { ...good, requestId: 'b'.repeat(36) } }).text);
   assert.equal(response.code, 'closed');
   assert.equal(rows.length, 1);

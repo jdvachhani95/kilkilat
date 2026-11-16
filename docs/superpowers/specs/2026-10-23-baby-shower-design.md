@@ -12,7 +12,7 @@ This update supersedes the earlier headline, gift wording, and callout order bel
 
 A personal, interactive invitation for approximately 35–40 families. Guests should enjoy discovering the invitation, find the practical information quickly, and RSVP with their name, email address, number of adults and number of children. The artwork should remain meaningful as a family keepsake after the event.
 
-The hosts are **Aruni & Jaydeep**. The online arrival reveal says **“See you in February!”**. Do not show a due day or year. RSVPs are requested by **November 15, 2026**, inclusive of that day in Hamilton's timezone.
+The hosts are **Aruni & Jaydeep**. The online arrival reveal says **“See you in February!”**. Do not show a due day or year. RSVPs are requested by **November 22, 2026**, inclusive of that day in Hamilton's timezone.
 
 ## Agreed visual direction
 

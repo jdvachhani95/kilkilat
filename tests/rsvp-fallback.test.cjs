@@ -14,7 +14,7 @@ test('missing receiver offers WhatsApp contact instead of promising a future RSV
   assert.equal(browser.ids['submit-rsvp'].disabled, true);
   assert.equal(browser.ids['form-availability'].hidden, false);
   assert.equal(browser.ids['form-availability'].textContent, 'Having trouble sending your RSVP? Message Aruni or Jaydeep on WhatsApp and we’ll help you out.');
-  assert.doesNotMatch(browser.ids['form-availability'].textContent, /ready soon|check back|November 15/);
+  assert.doesNotMatch(browser.ids['form-availability'].textContent, /ready soon|check back|November 22/);
 });
 
 test('working form hides the WhatsApp fallback', () => {

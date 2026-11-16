@@ -10,7 +10,7 @@ Open `index.html` in a browser for a disconnected preview, or run `npm run dev` 
 
 Edit `js/site-config.js`. The confirmed names, event date, arrival month, deadline and Magnolia Hall link are already entered. All values in this file are public. Never add Google credentials or private API keys.
 
-The event is November 29, 2026, Hamilton time. The fixed countdown timestamp is `2026-11-29T10:00:00-05:00`. Calendar downloads run from **10 AM to 2 PM**, with the end timestamp `2026-11-29T14:00:00-05:00`. The scratch card says “See you in February!”; no due day or year is stored in the public configuration. The gender reveal takes place in person at the shower. RSVPs close after November 15, Hamilton time. If the deadline changes, update it in both the site configuration and Apps Script.
+The event is November 29, 2026, Hamilton time. The fixed countdown timestamp is `2026-11-29T10:00:00-05:00`. Calendar downloads run from **10 AM to 2 PM**, with the end timestamp `2026-11-29T14:00:00-05:00`. The scratch card says “See you in February!”; no due day or year is stored in the public configuration. The gender reveal takes place in person at the shower. RSVPs close after November 22, Hamilton time. If the deadline changes, update it in both the site configuration and Apps Script.
 
 ## Connect the custom RSVP form to a private Sheet
 
@@ -37,6 +37,8 @@ RSVP_ENDPOINT=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
 Local builds load `.env` automatically, with existing shell environment values taking priority. Actions builds use only the workflow environment and do not load `.env`. `.env` and its variants are ignored by Git; `.env.example` contains only an empty template. Run `npm run dev` to build and preview with the configured endpoint. Opening the source `index.html` directly does not load `.env`. Keep the GitHub `RSVP_ENDPOINT` repository secret configured separately for deployment, since `.env` is not pushed.
 
 When editing the Apps Script later, update its deployment to a new version. Merely saving editor changes does not update the deployed version. Keep its existing deployment URL when possible.
+
+The RSVP deadline was extended through **November 22, 2026 at 11:59:59 PM Hamilton time**. To apply this to the live receiver, set `RSVP_DEADLINE` in the Apps Script editor to `2026-11-22T23:59:59-05:00`, save, then choose **Deploy → Manage deployments → Edit (pencil) → Version: New version → Deploy** on the existing web app. Publish the updated invitation through GitHub Pages as well. The existing Sheet and receiver URL stay the same.
 
 The receiver independently validates names, email and whole-number adult/child counts. It rejects the hidden honeypot field, prefixes formula-like text before writing, serializes writes with a lock, and recognizes a retried request ID. It has a modest per-email rate limit, not guest authentication. The endpoint is public; do not treat its URL as a secret. A repeat submission after reloading can create another row; request IDs prevent network retries from creating duplicates, not all household resubmissions.
 

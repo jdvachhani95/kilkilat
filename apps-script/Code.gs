@@ -1,7 +1,7 @@
 /* Run setup() once, then deploy as a web app: execute as you; access anyone.
  * See docs/SETUP.md. The Sheet stays private; this endpoint only accepts RSVPs.
  */
-var RSVP_DEADLINE = '2026-11-15T23:59:59-05:00';
+var RSVP_DEADLINE = '2026-11-22T23:59:59-05:00';
 
 function setup() {
   var properties = PropertiesService.getScriptProperties();
